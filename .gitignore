@@ -1,0 +1,9 @@
+node_modules
+.env
+.env.local
+dist
+*.db
+.turso
+kenney_ui-pack/
+kenney_animal-pack-redux/
+kenney_tiny-town/
