@@ -11,15 +11,18 @@ export default defineConfig({
   },
   server: {
     port: 5174,
+    fs: {
+      allow: ['..'],
+    },
   },
   build: {
     rollupOptions: {
       output: {
         // Split heavy chart/animation libs so the initial React bundle is lean
         manualChunks: {
-          recharts:       ['recharts'],
+          recharts: ['recharts'],
           'framer-motion': ['framer-motion'],
-          'react-vendor':  ['react', 'react-dom'],
+          'react-vendor': ['react', 'react-dom'],
         },
       },
     },
