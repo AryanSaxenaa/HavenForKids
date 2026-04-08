@@ -65,12 +65,12 @@ HAVEN is composed of three independently deployed applications backed by a share
            Child Browser                    Parent Browser
                 |                                |
     ┌──────────────────────┐        ┌─────────────────────────┐
-    │   AI Town (Vite)     │        │   Dashboard (Vite/React) │
-    │   Port 5173          │        │   Port 5174              │
-    │                      │        │                          │
-    │  Pixel-art village   │        │  Pattern visualisation   │
-    │  Five AI companions  │        │  Family Code access      │
-    │  Username + PIN auth │        │  Distress alerting       │
+    │   AI Town (Vite)     │        │   Dashboard (Vite/React)│
+    │   Port 5173          │        │   Port 5174             │
+    │                      │        │                         │
+    │  Pixel-art village   │        │  Pattern visualisation  │
+    │  Five AI companions  │        │  Family Code access     │
+    │  Username + PIN auth │        │  Distress alerting      │
     └──────────┬───────────┘        └──────────┬──────────────┘
                │                               │
                └──────────────┬────────────────┘
@@ -316,6 +316,36 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for full production deployment instructions
 
 ---
 
+## Acknowledgements
+
+HAVEN is built on top of [AI Town](https://github.com/a16z-infra/ai-town), an open-source framework for simulating AI agent worlds, originally created by a16z-infra and published under the MIT License. The world simulation engine, agent tick loop, pathfinding system, and memory infrastructure are all derived from that work. HAVEN's contributions are the authentication system, companion identities and ethically constrained system prompts, human-presence-gated token management, proactive check-in behaviour, shared companion memory with intuition rewrites, parent dashboard with distress detection, and the child-safety design decisions throughout.
+
+Additional acknowledgements:
+
+- [Convex](https://convex.dev) — serverless database and real-time backend
+- [Kenney](https://kenney.nl) — CC0-licensed pixel art assets used for the game environment
+
+---
+
+## Ethical Commitments
+
+HAVEN was designed with the following principles, applied throughout every architectural decision:
+
+**Privacy First.** Conversation text is stored only for the duration of active Convex subscriptions. The parent dashboard provides pattern-level visibility (frequency, tone score, distress flags) and does not expose transcript content. No third-party analytics or advertising SDKs are included. Family Codes, not usernames, are the parent access mechanism — the system is designed so that no single identifier grants unrestricted access to a child's data.
+
+**Do No Harm.** Companion system prompts explicitly prohibit medical advice, diagnosis, and referral to professional services. Responses are constrained to simple language appropriate for ages 7–12. A dual-layer distress detection system (LLM flag plus keyword matching) alerts parents when language associated with crisis appears — without interrupting the child's experience. Crisis resources are surfaced appropriately. Companions are instructed never to dismiss, minimise, or attempt to resolve distressing feelings; they validate and sit with them.
+
+**Inclusive Design.** Authentication uses a four-digit PIN rather than a password — accessible to younger children and those with limited typing proficiency. The chat interface includes a visible Send button alongside keyboard submission. Companion language targets a Grade 5 reading level. The system is browser-based and requires no installation, download, or device-specific capabilities.
+
+**Transparency.** AI involvement is not hidden from users. The companion characters are explicitly presented as storybook characters, not real animals or humans. System prompts instruct companions never to claim to be real. The parent dashboard clearly states what data is stored and what is not. This documentation describes the full technical architecture, including where AI is involved and what its constraints are.
+
+**Sustainable Impact.** The platform is built on Convex, a managed serverless infrastructure that scales automatically and requires no ongoing server maintenance. Agent LLM calls are gated behind human-presence detection — no tokens are consumed when no child is using the application. The codebase is open source, documented, and structured to be maintained and extended by others.
+
+---
+
 ## License
 
-MIT License. See [LICENSE](./LICENSE).
+HAVEN is released under the MIT License. See [LICENSE](./LICENSE).
+
+The underlying AI Town framework is also MIT licensed. Copyright 2023 a16z-infra. The full AI Town license is included at `ai-town/LICENSE`.
+
