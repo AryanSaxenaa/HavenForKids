@@ -1,67 +1,83 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts'
-import type { WeeklyEntry } from '../../../shared/src/types'
 
 interface WeeklyTrendProps {
-  entries: WeeklyEntry[]
+  entries: { week: string; character: string; count: number }[]
 }
 
 const CHARACTER_COLORS: Record<string, string> = {
-  Pip:     '#FF8C42',
-  Bramble: '#6B8CBA',
-  Flint:   '#C0392B',
-  Luna:    '#9B59B6',
-  Cleo:    '#F1C40F',
+  Pip: '#e8904a',
+  Bramble: '#6b8ec4',
+  Flint: '#d06060',
+  Luna: '#9b8ec4',
+  Cleo: '#c4a830',
 }
 
 export function WeeklyTrend({ entries }: WeeklyTrendProps) {
   if (entries.length === 0) return null
 
-  // Build a map of week → { week, Pip: n, Bramble: n, ... }
   const weekMap = new Map<string, Record<string, string | number>>()
   for (const entry of entries) {
     if (!weekMap.has(entry.week)) weekMap.set(entry.week, { week: entry.week })
     weekMap.get(entry.week)![entry.character] = entry.count
   }
 
-  // Sort weeks ascending
   const data = Array.from(weekMap.values()).sort((a, b) =>
     String(a['week']).localeCompare(String(b['week'])),
   )
 
-  // Only show weeks that have data; limit to last 8 weeks
   const visible = data.slice(-8)
-
-  // Which characters appear in this data?
   const characters = [...new Set(entries.map((e) => e.character))]
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
-      <h2 className="text-lg font-bold text-purple-300 mb-2">Visits Over Time</h2>
-      <p className="text-xs text-gray-500 mb-4">
-        Number of conversations per character, by week.
+    <div style={{
+      background: 'white',
+      borderRadius: '20px',
+      padding: '24px',
+      border: '1.5px solid #e8ddd4',
+      boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+    }}>
+      <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '18px', fontWeight: '600', color: '#2d2318', marginBottom: '6px' }}>
+        Visits Over Time
+      </h2>
+      <p style={{ fontSize: '12px', color: '#9e8d80', marginBottom: '20px' }}>
+        Number of conversations per companion, by week.
       </p>
       <ResponsiveContainer width="100%" height={200}>
         <LineChart data={visible} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
           <XAxis
             dataKey="week"
-            tick={{ fill: '#9ca3af', fontSize: 11 }}
-            tickFormatter={(v: string) => v.replace(/^\d{4}-/, '')}  // show "W08" not "2026-W08"
+            tick={{ fill: '#9e8d80', fontSize: 11, fontFamily: 'Inter' }}
+            tickFormatter={(v: string) => v.replace(/^\d{4}-/, '')}
+            axisLine={false}
+            tickLine={false}
           />
-          <YAxis allowDecimals={false} tick={{ fill: '#9ca3af', fontSize: 12 }} />
+          <YAxis
+            allowDecimals={false}
+            tick={{ fill: '#9e8d80', fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+          />
           <Tooltip
-            contentStyle={{ background: '#1f2937', border: '1px solid #374151', borderRadius: '8px', color: '#f9fafb' }}
+            contentStyle={{
+              background: 'white',
+              border: '1.5px solid #e8ddd4',
+              borderRadius: '12px',
+              color: '#2d2318',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+              fontSize: '13px',
+            }}
             labelFormatter={(v: string) => `Week ${v.replace(/^\d{4}-W/, '')}`}
-            cursor={{ stroke: 'rgba(124,106,245,0.3)' }}
+            cursor={{ stroke: 'rgba(155,142,196,0.2)' }}
           />
           <Legend
-            wrapperStyle={{ fontSize: '11px', color: '#9ca3af', paddingTop: '8px' }}
+            wrapperStyle={{ fontSize: '11px', color: '#6b5d4f', paddingTop: '8px' }}
           />
           {characters.map((char) => (
             <Line
               key={char}
               type="monotone"
               dataKey={char}
-              stroke={CHARACTER_COLORS[char] ?? '#7c6af5'}
+              stroke={CHARACTER_COLORS[char] ?? '#9b8ec4'}
               strokeWidth={2}
               dot={{ r: 3 }}
               connectNulls

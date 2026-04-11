@@ -1,15 +1,5 @@
-import type { CharacterVisit } from '../../../shared/src/types'
-
 interface WeekSummaryProps {
-  visits: CharacterVisit[]
-}
-
-const CHARACTER_EMOJI: Record<string, string> = {
-  Pip: '🦊',
-  Bramble: '🐻',
-  Flint: '🐺',
-  Luna: '🦉',
-  Cleo: '🐰',
+  visits: { character: string; count: number; avgTone: number }[]
 }
 
 export function WeekSummary({ visits }: WeekSummaryProps) {
@@ -19,40 +9,60 @@ export function WeekSummary({ visits }: WeekSummaryProps) {
     : 0
 
   const toneLabel =
-    avgTone <= 1.5 ? 'Very light and playful' :
-    avgTone <= 2.5 ? 'Mostly light' :
-    avgTone <= 3.5 ? 'A balanced mix' :
-    avgTone <= 4.5 ? 'Some heavier feelings' :
-    'Very heavy this week'
+    avgTone <= 1.5 ? 'Bright and playful' :
+      avgTone <= 2.5 ? 'Mostly light-hearted' :
+        avgTone <= 3.5 ? 'A thoughtful mix' :
+          avgTone <= 4.5 ? 'Some heavy feelings' :
+            'A difficult week'
 
   const toneColor =
-    avgTone <= 2.5 ? 'text-green-400' :
-    avgTone <= 3.5 ? 'text-yellow-400' :
-    'text-rose-400'
+    avgTone <= 2.5 ? '#5a8c58' :
+      avgTone <= 3.5 ? '#c08020' :
+        '#c05050'
+
+  const toneBg =
+    avgTone <= 2.5 ? '#f0f9f0' :
+      avgTone <= 3.5 ? '#fef8e2' :
+        '#fde8e8'
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
-      <h2 className="text-lg font-bold text-purple-300 mb-4">This Week</h2>
+    <div style={{
+      background: 'white',
+      borderRadius: '20px',
+      padding: '24px',
+      border: '1.5px solid #e8ddd4',
+      boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+    }}>
+      <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '18px', fontWeight: '600', color: '#2d2318', marginBottom: '20px' }}>
+        Activity This Week
+      </h2>
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div className="bg-gray-800 rounded-xl p-4 text-center">
-          <p className="text-3xl font-bold text-white">{totalConversations}</p>
-          <p className="text-xs text-gray-400 mt-1">Conversations</p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
+        <div style={{ background: '#f0f9f0', borderRadius: '14px', padding: '16px', textAlign: 'center', border: '1.5px solid #c8e8c6' }}>
+          <p style={{ fontSize: '36px', fontWeight: '800', color: '#5a8c58', lineHeight: 1 }}>{totalConversations}</p>
+          <p style={{ fontSize: '12px', color: '#7da87b', marginTop: '4px', fontWeight: '500' }}>Conversations</p>
         </div>
-        <div className="bg-gray-800 rounded-xl p-4 text-center">
-          <p className={`text-sm font-semibold mt-1 ${toneColor}`}>{toneLabel}</p>
-          <p className="text-xs text-gray-400 mt-1">Overall Tone</p>
-          <p className="text-xs text-gray-600 mt-0.5">1 light → 5 heavy</p>
+        <div style={{ background: toneBg, borderRadius: '14px', padding: '16px', textAlign: 'center', border: `1.5px solid ${toneColor}30` }}>
+          <p style={{ fontSize: '15px', fontWeight: '700', color: toneColor, lineHeight: 1.2 }}>{toneLabel}</p>
+          <p style={{ fontSize: '11px', color: '#9e8d80', marginTop: '6px' }}>Overall emotional tone</p>
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {visits.map((v) => (
-          <div key={v.character} className="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-2">
-            <span className="text-sm">
-              {CHARACTER_EMOJI[v.character] ?? '🐾'} <span className="text-gray-200">{v.character}</span>
+          <div key={v.character} style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            background: '#fafaf7', borderRadius: '12px', padding: '10px 14px',
+            border: '1.5px solid #e8ddd4',
+          }}>
+            <span style={{ fontSize: '14px', fontWeight: '500', color: '#2d2318' }}>{v.character}</span>
+            <span style={{
+              fontSize: '12px', color: '#6b5d4f', fontWeight: '600',
+              background: 'white', padding: '3px 10px', borderRadius: '50px',
+              border: '1.5px solid #e8ddd4',
+            }}>
+              {v.count} visit{v.count !== 1 ? 's' : ''}
             </span>
-            <span className="text-xs text-gray-400">{v.count} visit{v.count !== 1 ? 's' : ''}</span>
           </div>
         ))}
       </div>

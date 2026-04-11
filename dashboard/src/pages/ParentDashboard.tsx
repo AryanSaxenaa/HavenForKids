@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { RefreshCw, AlertCircle, AlertTriangle, Clock, MessageSquare, ShieldCheck } from 'lucide-react'
 import { useDashboardData } from '../hooks/useDashboardData'
 import { WeekSummary } from '../components/WeekSummary'
 import { CharacterChart } from '../components/CharacterChart'
@@ -20,7 +19,6 @@ function formatLastActive(ts: number | null): string {
   return `${days} day${days === 1 ? '' : 's'} ago`
 }
 
-// Render a 6-box family code input
 function FamilyCodeInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const chars = value.toUpperCase().split('').slice(0, 6)
   while (chars.length < 6) chars.push('')
@@ -30,7 +28,6 @@ function FamilyCodeInput({ value, onChange }: { value: string; onChange: (v: str
     while (arr.length < 6) arr.push('')
     arr[i] = char.toUpperCase().slice(-1)
     onChange(arr.join('').replace(/ /g, ''))
-    // focus next box
     const next = document.getElementById(`fc-${i + 1}`)
     if (char && next) (next as HTMLInputElement).focus()
   }
@@ -46,7 +43,7 @@ function FamilyCodeInput({ value, onChange }: { value: string; onChange: (v: str
   }
 
   return (
-    <div className="flex gap-2 justify-center">
+    <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
       {chars.map((c, i) => (
         <input
           key={i}
@@ -56,7 +53,32 @@ function FamilyCodeInput({ value, onChange }: { value: string; onChange: (v: str
           value={c}
           onChange={(e) => handleInput(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
-          className="w-10 h-12 text-center text-xl font-bold font-mono rounded-xl border-2 border-purple-700 bg-gray-900 text-white uppercase focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/30 transition-all"
+          style={{
+            width: '48px',
+            height: '56px',
+            textAlign: 'center',
+            fontSize: '22px',
+            fontWeight: '700',
+            fontFamily: 'Inter, monospace',
+            textTransform: 'uppercase',
+            border: c ? '2px solid #7da87b' : '2px solid #e8ddd4',
+            borderRadius: '14px',
+            background: c ? '#f4fbf4' : '#ffffff',
+            color: '#2d2318',
+            outline: 'none',
+            boxShadow: c ? '0 0 0 3px rgba(125,168,123,0.15)' : 'none',
+            transition: 'all 0.15s ease',
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#7da87b'
+            e.target.style.boxShadow = '0 0 0 3px rgba(125,168,123,0.2)'
+          }}
+          onBlur={(e) => {
+            if (!e.target.value) {
+              e.target.style.borderColor = '#e8ddd4'
+              e.target.style.boxShadow = 'none'
+            }
+          }}
         />
       ))}
     </div>
@@ -81,76 +103,129 @@ export function ParentDashboard() {
   const hasDistress = distressFlags && distressFlags.length > 0
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 font-mono">
+    <div style={{ minHeight: '100vh', background: 'var(--cream)', fontFamily: 'Inter, sans-serif' }}>
+
       {/* Header */}
-      <header className="border-b border-gray-800 px-6 py-4">
-        <div className="max-w-2xl mx-auto flex items-center justify-between">
+      <header style={{
+        background: 'rgba(255,255,255,0.85)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1.5px solid #e8ddd4',
+        padding: '0 24px',
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+      }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '60px' }}>
           <div>
-            <h1 className="text-xl font-bold text-purple-300 tracking-widest">HAVEN</h1>
-            <p className="text-xs text-gray-500">Parent Dashboard</p>
+            <div style={{ fontWeight: '800', fontSize: '16px', color: '#2d2318', letterSpacing: '-0.3px' }}>HAVEN</div>
+            <div style={{ fontSize: '11px', color: '#9e8d80', marginTop: '-2px' }}>Family Dashboard</div>
           </div>
-          <div className="flex items-center gap-3">
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             {childName && (
-              <span className="text-xs text-gray-400 bg-gray-900 px-3 py-1 rounded-full border border-gray-800">
-                Viewing: <strong className="text-white">{childName}</strong>
+              <span style={{
+                fontSize: '12px', color: '#6b5d4f', fontWeight: '500',
+                background: '#f0edf9', border: '1.5px solid #c5bce8',
+                borderRadius: '50px', padding: '5px 14px',
+              }}>
+                Viewing <strong style={{ color: '#2d2318' }}>{childName}</strong>
               </span>
             )}
             {activeCode && (
               <button
                 onClick={refetch}
-                className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-200 transition-colors"
+                style={{
+                  background: 'none', border: '1.5px solid #e8ddd4', cursor: 'pointer',
+                  fontSize: '12px', color: '#9e8d80', padding: '5px 12px', borderRadius: '8px',
+                }}
+                onMouseOver={e => (e.currentTarget.style.color = '#2d2318')}
+                onMouseOut={e => (e.currentTarget.style.color = '#9e8d80')}
               >
-                <RefreshCw className="w-3 h-3" />
-                Live
+                Refresh
               </button>
             )}
           </div>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 py-8 space-y-6">
-        {/* Family code input */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="text-center space-y-1">
-            <div className="flex items-center justify-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-purple-400" />
-              <label className="text-sm font-bold text-gray-300">Enter your Family Code</label>
-            </div>
-            <p className="text-xs text-gray-600">
-              Your child received this 6-character code when they created their HAVEN account
-            </p>
-          </div>
-          <FamilyCodeInput value={inputCode} onChange={setInputCode} />
-          <button
-            type="submit"
-            disabled={inputCode.replace(/[^A-Z0-9]/g, '').length !== 6}
-            className="w-full py-2.5 bg-purple-700 hover:bg-purple-600 disabled:opacity-40 text-white text-sm font-bold rounded-xl transition-colors"
-          >
-            View My Child&apos;s Dashboard
-          </button>
-          <p className="text-xs text-gray-700 text-center">
-            🔒 Only the holder of this code can view this child&apos;s activity
+      <main style={{ maxWidth: '720px', margin: '0 auto', padding: '40px 24px 80px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+        {/* Hero entry card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          style={{
+            background: 'linear-gradient(135deg, #f0f9f0 0%, #f0edf9 50%, #fef0e6 100%)',
+            border: '1.5px solid #e8ddd4',
+            borderRadius: '24px',
+            padding: '40px 32px',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+            textAlign: 'center',
+          }}
+        >
+          <h1 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '26px', fontWeight: '600', color: '#2d2318', marginBottom: '8px', lineHeight: 1.3 }}>
+            Welcome, caring grown-up
+          </h1>
+          <p style={{ fontSize: '14px', color: '#6b5d4f', marginBottom: '32px', maxWidth: '380px', margin: '0 auto 32px', lineHeight: 1.6 }}>
+            Enter the Family Code your child received when they joined HAVEN to see how they&apos;ve been doing.
           </p>
-        </form>
+
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <span style={{ fontSize: '11px', fontWeight: '600', color: '#6b5d4f', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '4px' }}>
+              Family Code
+            </span>
+            <FamilyCodeInput value={inputCode} onChange={setInputCode} />
+            <button
+              type="submit"
+              disabled={inputCode.replace(/[^A-Z0-9]/g, '').length !== 6}
+              style={{
+                marginTop: '4px',
+                padding: '13px 32px',
+                background: 'linear-gradient(135deg, #7da87b, #5a8c58)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '50px',
+                fontSize: '14px',
+                fontWeight: '700',
+                cursor: inputCode.replace(/[^A-Z0-9]/g, '').length !== 6 ? 'not-allowed' : 'pointer',
+                opacity: inputCode.replace(/[^A-Z0-9]/g, '').length !== 6 ? 0.45 : 1,
+                boxShadow: '0 4px 16px rgba(125,168,123,0.35)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              View My Child&apos;s Activity
+            </button>
+            <p style={{ fontSize: '11px', color: '#b0a090' }}>
+              Only the holder of this code can view this child&apos;s activity
+            </p>
+          </form>
+        </motion.div>
 
         {/* Loading */}
         {status === 'loading' && (
-          <div className="text-center py-12 text-gray-500 text-sm animate-pulse">
-            Finding your child's activity...
+          <div style={{ textAlign: 'center', padding: '40px', color: '#9e8d80', fontSize: '14px' }}>
+            <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+              Looking for {childName || 'your child'}&apos;s activity...
+            </motion.div>
           </div>
         )}
 
         {/* Error */}
         {status === 'error' && (
-          <div className="flex items-start gap-3 bg-rose-950 border border-rose-800 rounded-xl p-4">
-            <AlertCircle className="w-4 h-4 text-rose-400 mt-0.5 shrink-0" />
-            <div>
-              <p className="text-sm text-rose-300 font-bold">
-                {activeCode && !childName ? 'Family Code not found' : 'No activity yet'}
-              </p>
-              <p className="text-xs text-rose-400 mt-1">{error}</p>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            style={{
+              background: '#fde8e8', border: '1.5px solid #f4c0c0',
+              borderRadius: '16px', padding: '18px 20px',
+            }}
+          >
+            <p style={{ fontSize: '14px', fontWeight: '600', color: '#c05050', marginBottom: '4px' }}>
+              {activeCode && !childName ? 'Family Code not found' : 'Nothing here yet'}
+            </p>
+            <p style={{ fontSize: '13px', color: '#b06060' }}>{error}</p>
+          </motion.div>
         )}
 
         {/* Dashboard data */}
@@ -159,57 +234,74 @@ export function ParentDashboard() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="space-y-6"
+              style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
             >
-              {/* ── Stats bar ── */}
-              <div className="flex gap-3 flex-wrap">
-                <div className="flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-400">
-                  <Clock className="w-3 h-3 text-purple-400" />
-                  <span>Last active: <strong className="text-gray-200">{formatLastActive(lastActive ?? null)}</strong></span>
+              {/* Stats */}
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <div style={{
+                  background: '#ffffff', border: '1.5px solid #e8ddd4', borderRadius: '50px',
+                  padding: '8px 16px', fontSize: '13px', color: '#6b5d4f',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+                }}>
+                  Last active: <strong style={{ color: '#2d2318' }}>{formatLastActive(lastActive ?? null)}</strong>
                 </div>
-                <div className="flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs text-gray-400">
-                  <MessageSquare className="w-3 h-3 text-purple-400" />
-                  <span>Messages sent: <strong className="text-gray-200">{totalMessages ?? 0}</strong></span>
+                <div style={{
+                  background: '#ffffff', border: '1.5px solid #e8ddd4', borderRadius: '50px',
+                  padding: '8px 16px', fontSize: '13px', color: '#6b5d4f',
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+                }}>
+                  Messages: <strong style={{ color: '#2d2318' }}>{totalMessages ?? 0}</strong>
                 </div>
               </div>
 
-              {/* ── Distress alert ── */}
+              {/* Distress alert */}
               {hasDistress && (
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-start gap-3 bg-amber-950 border border-amber-600 rounded-xl p-4"
+                  style={{
+                    background: '#fef3e2', border: '1.5px solid #f0c070',
+                    borderRadius: '20px', padding: '20px 22px',
+                    boxShadow: '0 2px 12px rgba(212,137,42,0.1)',
+                  }}
                 >
-                  <AlertTriangle className="w-5 h-5 text-amber-400 mt-0.5 shrink-0" />
-                  <div>
-                    <p className="text-sm font-bold text-amber-300">⚠️ Attention may be needed</p>
-                    <p className="text-xs text-amber-400 mt-1">
-                      Some messages from {childName} contained words that may signal distress.
-                      Consider checking in with them in person today.
-                    </p>
-                    <p className="text-xs text-amber-600 mt-2 italic">
-                      Keywords detected: {distressFlags!.join(', ')}
-                    </p>
-                  </div>
+                  <p style={{ fontSize: '14px', fontWeight: '700', color: '#8a5010', marginBottom: '6px' }}>
+                    A gentle heads up
+                  </p>
+                  <p style={{ fontSize: '13px', color: '#7a6030', lineHeight: 1.6 }}>
+                    Some of {childName}&apos;s recent messages contained words that may signal they&apos;re going through something difficult. A warm check-in today could mean a lot.
+                  </p>
+                  <p style={{ fontSize: '11px', color: '#b09050', marginTop: '8px', fontStyle: 'italic' }}>
+                    Words noticed: {distressFlags!.join(', ')}
+                  </p>
                 </motion.div>
               )}
 
+              {/* Empty state */}
               {data.characterVisits.length === 0 ? (
-                <div className="text-center py-16 space-y-3">
-                  <p className="text-4xl">🌿</p>
-                  <p className="text-gray-400 font-bold">No conversations yet</p>
-                  <p className="text-gray-600 text-sm">
-                    Once {childName} chats with a companion in HAVEN, their activity will appear here — automatically and in real time.
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  style={{
+                    textAlign: 'center', padding: '60px 24px',
+                    background: 'white', borderRadius: '24px',
+                    border: '1.5px solid #e8ddd4',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                  }}
+                >
+                  <p style={{ fontFamily: 'Lora, serif', fontSize: '18px', fontWeight: '600', color: '#2d2318', marginBottom: '10px' }}>
+                    The journey is just beginning
                   </p>
-                </div>
+                  <p style={{ fontSize: '13px', color: '#9e8d80', maxWidth: '300px', margin: '0 auto', lineHeight: 1.7 }}>
+                    Once {childName} starts chatting with a companion in HAVEN, their activity will appear here automatically.
+                  </p>
+                </motion.div>
               ) : (
                 <>
                   <WeekSummary visits={data.characterVisits} />
                   <CharacterChart visits={data.characterVisits} />
                   <ToneBreakdown visits={data.characterVisits} />
-                  {data.weeklyTrend.length > 0 && (
-                    <WeeklyTrend entries={data.weeklyTrend} />
-                  )}
+                  {data.weeklyTrend.length > 0 && <WeeklyTrend entries={data.weeklyTrend} />}
                   <Suggestion text={data.suggestion} />
                 </>
               )}
@@ -219,13 +311,13 @@ export function ParentDashboard() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 mt-16 px-6 py-4 text-center space-y-1">
-        <p className="text-xs text-gray-600">
-          HAVEN stores conversation patterns and message text to generate these insights.
-        </p>
-        <p className="text-xs text-gray-700">
-          All data is held securely in your private Convex project and is never shared with third parties.
-        </p>
+      <footer style={{ borderTop: '1.5px solid #e8ddd4', padding: '24px', textAlign: 'center' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <p style={{ fontSize: '12px', color: '#9e8d80', fontWeight: '500', marginBottom: '4px' }}>HAVEN</p>
+          <p style={{ fontSize: '11px', color: '#b0a090' }}>
+            Conversation patterns are stored to generate these insights. Text is held securely and never shared with third parties.
+          </p>
+        </div>
       </footer>
     </div>
   )

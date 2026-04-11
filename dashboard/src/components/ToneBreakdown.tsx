@@ -1,24 +1,23 @@
 import { BarChart, Bar, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
-import type { CharacterVisit } from '../../../shared/src/types'
 
 interface ToneBreakdownProps {
-  visits: CharacterVisit[]
+  visits: { character: string; count: number; avgTone: number }[]
 }
 
 const CHARACTER_ZONE: Record<string, string> = {
-  Pip:     'Worry',
+  Pip: 'Worry',
   Bramble: 'Sadness',
-  Flint:   'Anger',
-  Luna:    'Loneliness',
-  Cleo:    'Joy',
+  Flint: 'Anger',
+  Luna: 'Loneliness',
+  Cleo: 'Joy',
 }
 
 const CHARACTER_COLORS: Record<string, string> = {
-  Pip:     '#FF8C42',
-  Bramble: '#6B8CBA',
-  Flint:   '#C0392B',
-  Luna:    '#9B59B6',
-  Cleo:    '#F1C40F',
+  Pip: '#e8904a',
+  Bramble: '#6b8ec4',
+  Flint: '#d06060',
+  Luna: '#9b8ec4',
+  Cleo: '#c4a830',
 }
 
 export function ToneBreakdown({ visits }: ToneBreakdownProps) {
@@ -28,7 +27,7 @@ export function ToneBreakdown({ visits }: ToneBreakdownProps) {
     zone: CHARACTER_ZONE[v.character] ?? '',
   }))
 
-  const toneDescription = (score: number) => {
+  const toneLabel = (score: number) => {
     if (score <= 1.5) return 'Very light'
     if (score <= 2.5) return 'Light'
     if (score <= 3.5) return 'Balanced'
@@ -37,37 +36,52 @@ export function ToneBreakdown({ visits }: ToneBreakdownProps) {
   }
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
-      <h2 className="text-lg font-bold text-purple-300 mb-2">Emotional Weight</h2>
-      <p className="text-xs text-gray-500 mb-4">
-        Average tone per character (1 = very light, 5 = very heavy). Dashed line = balanced midpoint.
+    <div style={{
+      background: 'white',
+      borderRadius: '20px',
+      padding: '24px',
+      border: '1.5px solid #e8ddd4',
+      boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+    }}>
+      <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '18px', fontWeight: '600', color: '#2d2318', marginBottom: '6px' }}>
+        Emotional Weight
+      </h2>
+      <p style={{ fontSize: '12px', color: '#9e8d80', marginBottom: '20px', lineHeight: 1.5 }}>
+        Average emotional weight per companion (1 = very light, 5 = very heavy). The dashed line marks the midpoint.
       </p>
-      <ResponsiveContainer width="100%" height={180}>
+      <ResponsiveContainer width="100%" height={190}>
         <BarChart data={data} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
-          <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 12 }} />
-          <YAxis domain={[0, 5]} tick={{ fill: '#9ca3af', fontSize: 12 }} />
+          <XAxis dataKey="name" tick={{ fill: '#9e8d80', fontSize: 12, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+          <YAxis domain={[0, 5]} tick={{ fill: '#9e8d80', fontSize: 12 }} axisLine={false} tickLine={false} />
           <Tooltip
-            contentStyle={{ background: '#1f2937', border: '1px solid #374151', borderRadius: '8px', color: '#f9fafb' }}
+            contentStyle={{
+              background: 'white',
+              border: '1.5px solid #e8ddd4',
+              borderRadius: '12px',
+              color: '#2d2318',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+              fontSize: '13px',
+            }}
             formatter={(value: number, _name: string, props: { payload?: { zone?: string } }) => {
               const zone = props.payload?.zone ? ` (${props.payload.zone})` : ''
-              return [`${value} — ${toneDescription(value)}${zone}`, 'Avg tone']
+              return [`${value} — ${toneLabel(value)}${zone}`, 'Avg weight']
             }}
-            cursor={{ fill: 'rgba(124,106,245,0.1)' }}
+            cursor={{ fill: 'rgba(155,142,196,0.08)' }}
           />
-          <ReferenceLine y={3} stroke="#4b5563" strokeDasharray="3 3" />
-          <Bar dataKey="tone" radius={[4, 4, 0, 0]}>
+          <ReferenceLine y={3} stroke="#e8ddd4" strokeDasharray="4 4" />
+          <Bar dataKey="tone" radius={[8, 8, 0, 0]}>
             {data.map((entry) => (
-              <Cell key={entry.name} fill={CHARACTER_COLORS[entry.name] ?? '#7c6af5'} />
+              <Cell key={entry.name} fill={CHARACTER_COLORS[entry.name] ?? '#9b8ec4'} opacity={0.85} />
             ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      {/* Character legend */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '14px', borderTop: '1px solid #f0eae0', paddingTop: '14px' }}>
         {data.map((entry) => (
-          <span key={entry.name} className="text-xs text-gray-500">
-            <span style={{ color: CHARACTER_COLORS[entry.name] ?? '#7c6af5' }}>■</span>{' '}
-            {entry.name} = {entry.zone}
+          <span key={entry.name} style={{ fontSize: '12px', color: '#6b5d4f', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '3px', background: CHARACTER_COLORS[entry.name] ?? '#9b8ec4', opacity: 0.85 }} />
+            {entry.name} — {entry.zone}
           </span>
         ))}
       </div>

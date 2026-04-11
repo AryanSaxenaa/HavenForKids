@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
 
 interface SuggestionProps {
   text: string
@@ -11,15 +10,22 @@ export function Suggestion({ text }: SuggestionProps) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.4 }}
-      className="bg-purple-950 border border-purple-800 rounded-2xl p-6"
+      style={{
+        background: 'linear-gradient(135deg, #f0edf9, #e8f4e8)',
+        border: '1.5px solid #c5bce8',
+        borderRadius: '20px',
+        padding: '24px',
+        boxShadow: '0 2px 12px rgba(155,142,196,0.12)',
+      }}
     >
-      <div className="flex items-center gap-2 mb-3">
-        <Sparkles className="w-5 h-5 text-purple-400" />
-        <h2 className="text-lg font-bold text-purple-300">Gentle Suggestion</h2>
-      </div>
-      <p className="text-sm text-gray-300 leading-relaxed">{text}</p>
-      <p className="text-xs text-gray-600 mt-4">
-        Generated from visit patterns only — no conversation text is ever stored or shared.
+      <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '16px', fontWeight: '600', color: '#2d2318', marginBottom: '14px' }}>
+        A gentle suggestion
+      </h2>
+      <p style={{ fontSize: '14px', color: '#4a3d30', lineHeight: 1.75, fontFamily: 'Lora, Georgia, serif', fontStyle: 'italic' }}>
+        &ldquo;{text}&rdquo;
+      </p>
+      <p style={{ fontSize: '11px', color: '#9e8d80', marginTop: '16px', borderTop: '1px solid #ddd6f0', paddingTop: '12px' }}>
+        Generated from visit patterns only. No conversation text is stored or shared.
       </p>
     </motion.div>
   )
