@@ -20,13 +20,14 @@ export function useDashboardData(familyCode: string | null): UseDashboardResult 
     familyCode ? { familyCode } : 'skip',
   );
 
-  const childName = userInfo?.username ?? null;
+  const childName = userInfo?.displayName ?? null;
+  const username = userInfo?.username ?? null;
   const isResolvingUser = familyCode !== null && userInfo === undefined;
 
-  // Step 2: fetch dashboard data by username
+  // Step 2: fetch dashboard data by username + displayName (resilient lookup)
   const data = useQuery(
     api.dashboard.getDashboardData,
-    childName ? { childName } : 'skip',
+    childName ? { childName, username: username ?? undefined } : 'skip',
   );
 
   const isLoading = isResolvingUser || (childName !== null && data === undefined);
