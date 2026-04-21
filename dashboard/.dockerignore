@@ -1,0 +1,6 @@
+node_modules
+dist
+.git
+.git_bak
+.env.local
+*.md
