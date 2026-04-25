@@ -1,18 +1,40 @@
 # HAVEN
 
-**An AI-powered emotional wellbeing platform for children aged 7–12.**
+### AI-Powered Emotional Wellbeing for Children, Real-Time Insights for Parents
 
-HAVEN is a browser-based pixel-art village populated by AI companion characters. Children explore the world naturally, walk up to characters, and talk — about their day, their worries, their feelings. Five distinct companions listen, reflect, and validate without ever diagnosing, judging, or alarming. A separate parent dashboard surfaces emotional patterns without exposing any conversation text.
+> **Live:** [Play HAVEN](https://ai-town-lxo1tyv1v-aryan-saxenas-projects-691b9d9c.vercel.app) &nbsp;·&nbsp; [Parent Dashboard](https://haven-dashboard-production.up.railway.app)
 
 ---
 
-## The Problem
+HAVEN is a browser-based pixel-art village where AI companion characters help children aged 7–12 express their feelings through natural conversation. Children don't fill out mood surveys or label emotions — they walk around a cosy village, chat with storybook friends, and feel heard. Behind the scenes, a real-time parent dashboard surfaces emotional patterns, sentiment trends, and distress alerts — **without ever exposing conversation text**.
 
-One in four people will experience a mental health condition in their lifetime. For children, the gap between need and support is particularly acute: the average delay between first symptoms and first treatment is twelve years. Early intervention is the most effective tool available — but children rarely have the vocabulary, the confidence, or a trusted channel to express what they are experiencing.
+<br>
 
-Existing support tools fall into two categories: clinical tools designed for professionals, or consumer apps that ask children to understand and label their own emotions before they are ready. Neither fills the gap between "a child is struggling" and "a child receives support."
+## Why HAVEN Exists
 
-HAVEN takes a different approach. Children do not talk *about* their feelings. They walk around a pixel-art village and talk to friends — and the friends happen to be designed to hear them.
+One in four people will experience a mental health condition in their lifetime. For children, the gap between need and support is staggering: the average delay between first symptoms and first professional help is **twelve years**. Early intervention is the single most effective tool we have — but children rarely have the vocabulary, the confidence, or a trusted channel to express what they are going through.
+
+Existing tools fall into two categories: clinical instruments designed for professionals, or consumer apps that ask children to understand and label their own emotions before they are developmentally ready. Neither fills the gap between *"a child is struggling"* and *"a child receives support."*
+
+**HAVEN takes a different approach.** Children don't talk *about* their feelings. They walk around a pixel-art village and talk to friends — and the friends happen to be designed to hear them.
+
+---
+
+## Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Pixel-art village** | A warm, explorable overworld powered by PixiJS — no downloads, runs in any modern browser |
+| **AI companions** | Three distinct companions (Sunny, Sage, Keeper) each specialising in a different emotional domain |
+| **Proactive check-ins** | Companions don't wait to be approached — they walk to the child and start conversations every 2–3 minutes |
+| **Persistent memory** | Companions remember previous conversations across sessions using vector-embedded semantic memory |
+| **Conversation safety** | Companions never leave mid-conversation with a child; idle-kick protections prevent accidental disconnects |
+| **Real-time sentiment analysis** | Keyword-based dual-layer scoring tracks emotional tone across every conversation |
+| **70+ distress detectors** | Expanded keyword set covering bullying (physical, verbal, social), school avoidance, self-harm ideation, isolation, and more |
+| **Parent dashboard** | Visualises conversation frequency, tone trends, companion usage, and distress alerts — zero conversation text exposed |
+| **Family Code access** | Parents authenticate via a 6-character code; no usernames, no passwords, no surveillance |
+| **Child-safe auth** | 4-digit PIN login designed for ages 7–12 — no email, no passwords |
+| **Privacy by design** | No third-party analytics, no ad SDKs, no data sharing — everything stays in your own Convex deployment |
 
 ---
 
@@ -20,95 +42,90 @@ HAVEN takes a different approach. Children do not talk *about* their feelings. T
 
 ### For the Child
 
-The child opens a browser and is greeted by a small village. They choose a character, name themselves, and explore. When they walk close to a companion character, that character lights up and invites conversation. The child types naturally. The companion responds warmly, asks follow-up questions, and validates what the child shares — always in simple language, always without diagnosis or judgement.
+The child opens a browser and enters a small village. They choose a character, name themselves, and explore. When they walk close to a companion, a conversation begins. The child types naturally. The companion responds warmly, asks follow-up questions, and validates what the child shares — always in simple language, always without diagnosis or judgement.
 
-Five companion archetypes cover the primary emotional domains a child is likely to encounter:
+| Companion | Emotional Domain | Personality |
+|-----------|-----------------|-------------|
+| **Sunny** | Anxiety and worry | Curious and gentle; shares small worries of their own to normalise the feeling |
+| **Sage** | Stress and overwhelm | Calm and mindful; teaches grounding through conversation |
+| **Keeper** | Fear and uncertainty | Steady and patient; breaks large problems into small, manageable steps |
 
-| Companion | Emotional Domain | Approach |
-|-----------|-----------------|----------|
-| Sunny | Anxiety and worry | Curious, shares small worries of their own |
-| Sage | Stress and overwhelm | Calm, mindful, teaches grounding through conversation |
-| Spark | Creativity and expression | Energetic, uses games and stories to open up dialogue |
-| Keeper | Fear and uncertainty | Steady, breaks large problems into small steps |
-| Joy | Sadness and isolation | Warm, celebratory of small things, sits with hard feelings |
-
-Each companion has persistent memory. When a child returns the following day, the companion remembers them and continues where the conversation left off.
+Each companion has **persistent memory**. When a child returns the next day, the companion remembers their previous conversations and picks up naturally.
 
 ### For the Parent
 
-Parents access a separate dashboard using a six-character Family Code provided to them when the child registers. The dashboard shows:
+Parents access a separate dashboard using a **six-character Family Code** generated at registration. The dashboard shows:
 
-- Which companions the child has spoken with, and how often
-- The emotional tone pattern across conversations (a numerical score, not text)
-- A generated suggestion based on observed patterns
-- A distress alert if any message contained language associated with crisis
-- The child's last active timestamp and total message count
+- Which companions the child has spoken with, and how often (with interactive charts)
+- **Real-time sentiment scoring** across conversations (1–5 scale, keyword-based — not a random number)
+- Context-aware suggestions that adapt based on detected distress and emotional patterns
+- **Distress alerts** if any message contains language associated with crisis, bullying, or school avoidance
+- Last active timestamp and total message count
 
-**The parent dashboard never displays conversation text.** The emotional wellbeing of the child is protected; the parent receives pattern-level information, not surveillance.
+> **The parent dashboard never displays conversation text.** Parents receive pattern-level information, not surveillance.
 
 ### Safety System
 
-Every message the child sends is evaluated by two independent detection layers running in parallel:
+Every message is evaluated by **two independent detection layers** running in parallel:
 
-1. The companion AI is instructed to set a crisis flag if it detects language indicating self-harm, abuse, or severe distress
-2. A keyword-matching layer on the backend scans for a defined set of distress phrases
+1. **LLM-level analysis** — The companion AI is instructed to flag language indicating self-harm, abuse, or severe distress
+2. **Keyword matching** — A backend layer scans against 70+ distress phrases covering:
+   - Self-harm and suicidal ideation
+   - Physical bullying ("punched me", "kicked me", "hit me")
+   - Verbal/social bullying ("calls me names", "making fun of me", "laughed at me")
+   - School avoidance ("don't want to go to school", "hate school", "scared of school")
+   - Isolation and loneliness ("nobody likes me", "have no friends", "feel alone")
 
-If either layer triggers, the parent dashboard immediately surfaces a distress alert. The child sees a calm, non-alarming response from the companion.
+If either layer triggers, the parent dashboard immediately surfaces a distress alert. The child sees nothing alarming.
 
 ---
 
 ## Architecture
 
-HAVEN is composed of three independently deployed applications backed by a shared Convex serverless database.
-
 ```
            Child Browser                    Parent Browser
-                |                                |
-    ┌──────────────────────┐        ┌─────────────────────────┐
-    │   AI Town (Vite)     │        │   Dashboard (Vite/React)│
-    │   Port 5173          │        │   Port 5174             │
-    │                      │        │                         │
-    │  Pixel-art village   │        │  Pattern visualisation  │
-    │  Five AI companions  │        │  Family Code access     │
-    │  Username + PIN auth │        │  Distress alerting      │
-    └──────────┬───────────┘        └──────────┬──────────────┘
-               │                               │
-               └──────────────┬────────────────┘
-                              │
-              ┌───────────────────────────────┐
-              │   Convex Serverless Database  │
-              │   (abundant-sheep-629)        │
-              │                               │
-              │   havenUsers     (accounts)   │
-              │   worlds         (game state) │
-              │   messages       (chat log)   │
-              │   memories       (AI memory)  │
-              │   playerDescriptions          │
-              │   agentDescriptions           │
-              │   participatedTogether        │
-              │   archivedConversations       │
-              └──────────────┬────────────────┘
-                             │
-              ┌──────────────────────────────┐
-              │   LLM Provider               │
-              │   (OpenAI-compatible API)    │
-              │   Companion conversations    │
-              │   Memory summarisation       │
-              │   Reflection generation      │
-              └──────────────────────────────┘
+                │                                │
+    ┌───────────────────────┐       ┌──────────────────────────┐
+    │  AI Town Game (Vite)  │       │  Parent Dashboard (Vite) │
+    │  Vercel (Free Tier)   │       │  Railway (Hobby Tier)    │
+    │                       │       │                          │
+    │  PixiJS village       │       │  Recharts visualisation  │
+    │  Three AI companions  │       │  Framer Motion UI        │
+    │  Username + PIN auth  │       │  Family Code access      │
+    └───────────┬───────────┘       └────────────┬─────────────┘
+                │                                │
+                └───────────────┬────────────────┘
+                                │
+               ┌────────────────────────────────┐
+               │   Convex Serverless Backend    │
+               │   Real-time subscriptions      │
+               │                                │
+               │   havenUsers    (accounts)     │
+               │   worlds        (game state)   │
+               │   messages      (chat log)     │
+               │   memories      (AI memory)    │
+               │   archivedConversations        │
+               └────────────────┬───────────────┘
+                                │
+               ┌────────────────────────────────┐
+               │   LLM Provider (Mistral AI)    │
+               │   Companion conversations      │
+               │   Memory summarisation         │
+               │   Reflection generation        │
+               └────────────────────────────────┘
 ```
 
-### Key Design Decisions
+### Design Decisions
 
-**Stable identity via username.** Each child's username becomes their `clientToken` in the game engine. This means agent memories are permanently associated with a specific child across every session — returning children are genuinely remembered.
-
-**Parent access via Family Code, not username.** The six-character Family Code is generated at registration and is the only mechanism for parent dashboard access. Knowing a child's username grants no access to their data.
-
-**Agent memory isolation.** Convex memories are indexed by `playerId`, which is derived from the username token. Two children playing simultaneously have entirely separate memory graphs.
-
-**Proactive companion engagement.** Companions do not wait to be approached. Every two to three minutes, a free companion will walk to the child's character and initiate conversation. A per-agent jitter offset prevents all companions from arriving simultaneously.
-
-**No conversation abandonment.** When a companion is speaking with a human child, the standard message limit and duration timeout are suspended. Companions will not leave a conversation mid-flow. These limits apply only to agent-to-agent conversations.
+| Decision | Why |
+|----------|-----|
+| **Username as stable identity** | Each child's username becomes their `clientToken` in the game engine — agent memories are permanently tied to a specific child across every session |
+| **Family Code, not username** | The 6-character code is the only mechanism for parent dashboard access; knowing a username grants nothing |
+| **Memory isolation** | Memories are indexed by `playerId` derived from username; two children playing simultaneously have entirely separate memory graphs |
+| **Proactive engagement** | Companions walk to children every 2–3 minutes with per-agent jitter offsets to prevent simultaneous arrivals |
+| **Conversation-aware idle protection** | The idle-kick timer (5 min) is suspended when a child is in an active conversation — no accidental disconnects |
+| **Agent leave guard** | Companions are blocked from leaving a conversation while talking to a human child, even if internal message limits are reached |
+| **Real sentiment scoring** | Tone analysis uses actual keyword-based NLP (positive/negative word counting) instead of placeholder values |
 
 ---
 
@@ -117,75 +134,96 @@ HAVEN is composed of three independently deployed applications backed by a share
 | Component | Technology |
 |-----------|-----------|
 | Game engine | AI Town (Convex-native pixel-art village simulation) |
-| Game UI | React 18, Vite, Tailwind CSS |
-| Dashboard | React 18, Vite, Framer Motion, Recharts, Lucide |
+| Rendering | PixiJS |
+| Game UI | React 18, Vite 6, Tailwind CSS |
+| Dashboard UI | React 18, Vite 6, Framer Motion, Recharts, Lucide |
 | Backend | Convex (serverless TypeScript functions, real-time subscriptions) |
 | Database | Convex integrated database (indexed tables, vector search) |
-| AI conversations | OpenAI-compatible LLM via Convex action |
+| LLM provider | Mistral AI (mistral-large-latest) via OpenAI-compatible SDK |
 | AI memory | Vector embeddings with semantic search (Convex vector store) |
-| Authentication | Custom username + PIN system, stored in `havenUsers` table |
-| Deployment | Convex Cloud (backend), Vite dev server or Vercel (frontend) |
+| Child auth | Custom username + 4-digit PIN system |
+| Sentiment analysis | Dual-layer keyword-based scoring (70+ distress phrases, positive/negative word lists) |
+| Game hosting | Vercel (free tier) |
+| Dashboard hosting | Railway (hobby tier, Dockerised) |
+
+---
+
+## Live Deployments
+
+| Service | Platform | URL |
+|---------|----------|-----|
+| AI Town Game | Vercel | [ai-town-lxo1tyv1v-aryan-saxenas-projects-691b9d9c.vercel.app](https://ai-town-lxo1tyv1v-aryan-saxenas-projects-691b9d9c.vercel.app) |
+| Parent Dashboard | Railway | [haven-dashboard-production.up.railway.app](https://haven-dashboard-production.up.railway.app) |
+| Convex Backend | Convex Cloud | `lovely-quail-205.convex.cloud` |
 
 ---
 
 ## Project Structure
 
 ```
-/
-├── ai-town/                    # Child-facing game application
+Haven/
+├── ai-town/                         # Child-facing game application
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── LoginScreen.tsx         # Username + PIN auth UI
-│   │   │   ├── MessageInput.tsx        # Chat input with Send button
-│   │   │   ├── PlayerDetails.tsx       # Character panel (no system prompts exposed)
-│   │   │   └── ...
-│   │   └── App.tsx                     # Auth gate + game shell
+│   │   │   ├── LoginScreen.tsx              # Username + PIN auth UI
+│   │   │   ├── MessageInput.tsx             # Chat input with Send button
+│   │   │   └── PlayerDetails.tsx            # Character panel
+│   │   └── App.tsx                          # Auth gate + game shell
 │   ├── convex/
-│   │   ├── schema.ts                   # Database schema including havenUsers
-│   │   ├── auth.ts                     # Registration, login, family code validation
-│   │   ├── dashboard.ts                # Parent dashboard data aggregation
+│   │   ├── schema.ts                        # Full database schema
+│   │   ├── auth.ts                          # Registration, login, family code
+│   │   ├── dashboard.ts                     # Sentiment scoring + distress detection
+│   │   ├── constants.ts                     # Tunable behaviour constants
 │   │   ├── agent/
-│   │   │   ├── conversation.ts         # LLM prompts and conversation flow
-│   │   │   └── memory.ts               # Memory creation and shared intuition
+│   │   │   ├── conversation.ts              # LLM prompts and conversation flow
+│   │   │   └── memory.ts                    # Memory creation and recall
 │   │   └── aiTown/
-│   │       ├── agent.ts                # Agent tick logic (human-aware timeout rules)
-│   │       └── agentOperations.ts      # Proactive check-in behaviour
+│   │       ├── agent.ts                     # Agent tick logic (human-aware)
+│   │       ├── agentInputs.ts               # Agent leave guards
+│   │       ├── agentOperations.ts           # Proactive check-in behaviour
+│   │       └── player.ts                    # Conversation-aware idle protection
 │   └── data/
-│       └── characters.ts               # Companion identities and system prompts
-├── dashboard/                  # Parent-facing dashboard application
+│       └── characters.ts                    # Companion identities and prompts
+│
+├── dashboard/                       # Parent-facing dashboard application
+│   ├── Dockerfile                           # Multi-stage Docker build (node:20.19)
+│   ├── railway.toml                         # Railway deployment config
 │   └── src/
 │       ├── hooks/
-│       │   └── useDashboardData.ts     # Family Code → username → data resolution
+│       │   └── useDashboardData.ts          # Family Code → data resolution
 │       └── pages/
-│           └── ParentDashboard.tsx     # Dashboard UI with distress alerts
-└── shared/                     # Shared TypeScript types
+│           └── ParentDashboard.tsx           # Dashboard UI with alerts
+│
+├── ARCHITECTURE.md                  # Detailed technical architecture
+├── DEPLOYMENT.md                    # Production deployment guide
+└── README.md                        # This file
 ```
 
 ---
 
 ## Companion Design
 
-Each companion is defined by an identity, an emotional archetype, and a behavioural plan. The system prompt is never exposed to the user interface. Key behavioural constraints enforced across all companions:
+Each companion is defined by a unique identity, an emotional archetype, and a behavioural plan. The system prompt is never exposed in the UI. Key behavioural constraints enforced across all companions:
 
-- Responses are limited to 2–3 sentences in simple language appropriate for ages 7–12
-- Companions validate feelings before offering any guidance
-- Companions never diagnose, never refer to professional help unprompted, and never dismiss or minimise what a child shares
-- When companions share information from their collective awareness of a child, they do so as natural intuition rather than explicit attribution ("I've been thinking about that kind of feeling lately" rather than "Sage told me about your situation")
-- Companions do not leave a conversation with a human child unless the child ends it
+- Responses are limited to **2–3 sentences** in simple language appropriate for ages 7–12
+- Companions **validate feelings before offering any guidance**
+- Companions never diagnose, never refer to professional help unprompted, and never dismiss what a child shares
+- When companions reference shared awareness of a child, they frame it as natural intuition ("I've been thinking about that kind of feeling lately") rather than inter-agent communication
+- **Companions never leave a conversation with a human child** — message limits and duration timeouts only apply to agent-to-agent conversations
 
 ---
 
 ## Privacy and Ethical Design
 
-**Data minimisation.** The system collects only what is necessary: username, display name, a hashed PIN, a family code, aggregate conversation statistics, and message text for the duration of the session.
+**Privacy First.** The parent dashboard provides pattern-level visibility — frequency, tone score, distress flags — and does not expose any conversation transcripts. No third-party analytics, advertising SDKs, or tracking of any kind. Family Codes (not usernames) are the parent access mechanism.
 
-**Parental access is pattern-based.** The parent dashboard surfaces frequency, tone score distributions, and distress flags. It does not provide conversation transcripts.
+**Do No Harm.** Companion prompts explicitly prohibit medical advice, diagnosis, and unsolicited referrals. A dual-layer distress detection system (LLM flag + 70+ keyword matching) alerts parents when crisis-associated language appears — without interrupting the child's experience.
 
-**Distress detection.** A list of crisis-associated keywords is evaluated against every message. On match, the parent dashboard surfaces an alert recommending an in-person conversation. The child's experience is not interrupted.
+**Inclusive Design.** Four-digit PIN authentication accessible to young children. Visible Send button alongside keyboard submission. Grade 5 reading level for all companion responses. Browser-based — no installation required.
 
-**No third-party data sharing.** All data is stored within the project's own Convex deployment. No analytics platforms, advertising SDKs, or third-party tracking.
+**Transparency.** Companions are presented as storybook characters, never as real beings. System prompts instruct companions never to claim personhood. This documentation describes the full technical architecture openly.
 
-**Age-appropriate design.** The authentication system uses a four-digit PIN rather than passwords. The interface uses large text, simple language, and visual affordances. The chat input includes both keyboard submission and a visible Send button.
+**Zero Token Waste.** Agent LLM calls are gated behind human-presence detection — no tokens are consumed when no child is playing.
 
 ---
 
@@ -193,9 +231,9 @@ Each companion is defined by an identity, an emotional archetype, and a behaviou
 
 ### Prerequisites
 
-- Node.js 20 or later
-- A Convex account (free tier sufficient): [convex.dev](https://convex.dev)
-- An OpenAI API key or compatible LLM provider key
+- Node.js 20+
+- A Convex account (free tier): [convex.dev](https://convex.dev)
+- An LLM API key (Mistral AI recommended, or any OpenAI-compatible provider)
 
 ### 1. Clone the repository
 
@@ -207,14 +245,9 @@ cd Haven
 ### 2. Install dependencies
 
 ```bash
-# Root
-npm install
-
-# AI Town (game + backend)
-cd ai-town && npm install && cd ..
-
-# Dashboard
-cd dashboard && npm install && cd ..
+npm install                              # Root
+cd ai-town && npm install && cd ..       # Game
+cd dashboard && npm install && cd ..     # Dashboard
 ```
 
 ### 3. Configure the Convex backend
@@ -224,14 +257,13 @@ cd ai-town
 npx convex dev --once
 ```
 
-This will prompt you to log in to Convex and create a new project. Note the deployment URL shown (format: `https://[name].convex.cloud`).
+This creates your Convex deployment and generates API types.
 
 ### 4. Set environment variables
 
 **AI Town** — create `ai-town/.env.local`:
 ```env
 VITE_CONVEX_URL=https://your-deployment.convex.cloud
-OPENAI_API_KEY=sk-...
 ```
 
 **Dashboard** — create `dashboard/.env.local`:
@@ -239,24 +271,22 @@ OPENAI_API_KEY=sk-...
 VITE_CONVEX_URL=https://your-deployment.convex.cloud
 ```
 
-**Set the API key in Convex:**
+**Set the LLM key in Convex:**
 ```bash
 cd ai-town
-npx convex env set OPENAI_API_KEY sk-your-key-here
+npx convex env set OPENAI_API_KEY your-api-key-here
 ```
 
 ### 5. Run the development servers
 
-In separate terminals:
-
 ```bash
-# Terminal 1 — Convex backend (hot-reloads on function changes)
+# Terminal 1 — Convex backend
 cd ai-town && npx convex dev
 
-# Terminal 2 — AI Town game
+# Terminal 2 — Game
 cd ai-town && npm run dev
 
-# Terminal 3 — Parent dashboard
+# Terminal 3 — Dashboard
 cd dashboard && npm run dev
 ```
 
@@ -270,76 +300,51 @@ cd dashboard && npm run dev
 
 1. Open `http://localhost:5173`
 2. Click **"I'm new here"** to create an account
-3. Note the Family Code displayed after registration
+3. Note the **Family Code** displayed after registration
 4. Click **"Enter HAVEN"** to enter the game
-5. Click **"Interact"** in the footer to join the world as a player
-6. Open `http://localhost:5174` in a separate tab
-7. Enter the Family Code to view the parent dashboard
+5. Click **"Interact"** to join the world as a player
+6. Wait ~2 minutes — a companion will walk over and start talking
+7. Open `http://localhost:5174` and enter the Family Code
 
 ---
 
 ## Configuration Reference
 
-### Companion behaviour constants (`ai-town/convex/constants.ts`)
+### Behaviour Constants (`ai-town/convex/constants.ts`)
 
 | Constant | Default | Description |
 |----------|---------|-------------|
-| `HAVEN_CHECKIN_INTERVAL` | 120,000 ms | Base interval between proactive companion check-ins |
-| `HAVEN_CHECKIN_JITTER` | 60,000 ms | Random offset added per companion to stagger arrivals |
-| `AWKWARD_CONVERSATION_TIMEOUT` | 180,000 ms | Time before companion speaks first if child is silent |
-| `MAX_CONVERSATION_DURATION` | 1,200,000 ms | Maximum agent-to-agent conversation duration |
-| `MAX_CONVERSATION_MESSAGES` | 12 | Maximum agent-to-agent message count |
-| `CONVERSATION_COOLDOWN` | — | Cooldown before an agent tries to start another conversation |
-
-Note: `MAX_CONVERSATION_DURATION` and `MAX_CONVERSATION_MESSAGES` do not apply to conversations between a companion and a human child. Those conversations continue until the child ends them.
-
-### Adding or modifying companions (`ai-town/data/characters.ts`)
-
-Each entry in the `Descriptions` array defines a companion:
-
-```typescript
-{
-  name: 'CompanionName',
-  character: 'f1',           // sprite sheet identifier
-  identity: `...`,           // full system prompt
-  plan: `...`,               // conversation goal
-}
-```
-
-Companions are assigned to sprite sheets `f1` through `f8`. The number of entries in `Descriptions` determines how many AI companions appear in the world.
+| `HAVEN_CHECKIN_INTERVAL` | 2 min | Base interval between proactive companion check-ins |
+| `HAVEN_CHECKIN_JITTER` | 60 sec | Random offset per companion to stagger arrivals |
+| `AWKWARD_CONVERSATION_TIMEOUT` | 3 min | Companion speaks first if child is silent |
+| `MAX_CONVERSATION_DURATION` | 20 min | Maximum agent-to-agent conversation (does **not** apply to human conversations) |
+| `MAX_CONVERSATION_MESSAGES` | 12 | Maximum agent-to-agent messages (does **not** apply to human conversations) |
+| `HUMAN_IDLE_TOO_LONG` | 5 min | Idle-kick timer (suspended during active conversations) |
 
 ---
 
 ## Deployment
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for full production deployment instructions covering Convex Cloud and Vercel.
+The system is deployed across three platforms:
+
+- **Convex Cloud** — Backend functions + database → `npx convex deploy`
+- **Vercel** — AI Town game (static site) → `vercel --prod`
+- **Railway** — Parent dashboard (Dockerised) → `railway up`
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for the full step-by-step guide.
 
 ---
 
 ## Acknowledgements
 
-HAVEN is built on top of [AI Town](https://github.com/a16z-infra/ai-town), an open-source framework for simulating AI agent worlds, originally created by a16z-infra and published under the MIT License. The world simulation engine, agent tick loop, pathfinding system, and memory infrastructure are all derived from that work. HAVEN's contributions are the authentication system, companion identities and ethically constrained system prompts, human-presence-gated token management, proactive check-in behaviour, shared companion memory with intuition rewrites, parent dashboard with distress detection, and the child-safety design decisions throughout.
+HAVEN is built on top of [AI Town](https://github.com/a16z-infra/ai-town), an open-source framework for simulating AI agent worlds by a16z-infra (MIT License). The world simulation engine, agent tick loop, pathfinding, and memory infrastructure are derived from that work.
 
-Additional acknowledgements:
+HAVEN's original contributions include: the authentication system, companion identities with ethically constrained prompts, human-presence-gated token management, proactive check-in behaviour, conversation-aware idle protection, agent leave guards, shared companion memory with intuition rewrites, keyword-based sentiment analysis, 70+ phrase distress detection, and the parent dashboard.
 
-- [Convex](https://convex.dev) — serverless database and real-time backend
-- [Kenney](https://kenney.nl) — CC0-licensed pixel art assets used for the game environment
-
----
-
-## Ethical Commitments
-
-HAVEN was designed with the following principles, applied throughout every architectural decision:
-
-**Privacy First.** Conversation text is stored only for the duration of active Convex subscriptions. The parent dashboard provides pattern-level visibility (frequency, tone score, distress flags) and does not expose transcript content. No third-party analytics or advertising SDKs are included. Family Codes, not usernames, are the parent access mechanism — the system is designed so that no single identifier grants unrestricted access to a child's data.
-
-**Do No Harm.** Companion system prompts explicitly prohibit medical advice, diagnosis, and referral to professional services. Responses are constrained to simple language appropriate for ages 7–12. A dual-layer distress detection system (LLM flag plus keyword matching) alerts parents when language associated with crisis appears — without interrupting the child's experience. Crisis resources are surfaced appropriately. Companions are instructed never to dismiss, minimise, or attempt to resolve distressing feelings; they validate and sit with them.
-
-**Inclusive Design.** Authentication uses a four-digit PIN rather than a password — accessible to younger children and those with limited typing proficiency. The chat interface includes a visible Send button alongside keyboard submission. Companion language targets a Grade 5 reading level. The system is browser-based and requires no installation, download, or device-specific capabilities.
-
-**Transparency.** AI involvement is not hidden from users. The companion characters are explicitly presented as storybook characters, not real animals or humans. System prompts instruct companions never to claim to be real. The parent dashboard clearly states what data is stored and what is not. This documentation describes the full technical architecture, including where AI is involved and what its constraints are.
-
-**Sustainable Impact.** The platform is built on Convex, a managed serverless infrastructure that scales automatically and requires no ongoing server maintenance. Agent LLM calls are gated behind human-presence detection — no tokens are consumed when no child is using the application. The codebase is open source, documented, and structured to be maintained and extended by others.
+**Additional credits:**
+- [Convex](https://convex.dev) — Serverless database and real-time backend
+- [Mistral AI](https://mistral.ai) — LLM provider
+- [Kenney](https://kenney.nl) — CC0-licensed pixel art assets
 
 ---
 
@@ -347,5 +352,5 @@ HAVEN was designed with the following principles, applied throughout every archi
 
 HAVEN is released under the MIT License. See [LICENSE](./LICENSE).
 
-The underlying AI Town framework is also MIT licensed. Copyright 2023 a16z-infra. The full AI Town license is included at `ai-town/LICENSE`.
+The underlying AI Town framework is also MIT licensed. Copyright 2023 a16z-infra. See `ai-town/LICENSE`.
 
