@@ -2,13 +2,35 @@
 
 ### A Children's Emotional Health & Wellness Platform Powered by AI
 
-> **Live:** [Open HavenForKids](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) &nbsp;·&nbsp; [Parent Wellness Dashboard](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app)
+> **Live:** [Open HavenForKids](https://havenforkids-game-708818914032.us-central1.run.app) &nbsp;·&nbsp; [Parent Wellness Dashboard](https://havenforkids-dashboard-708818914032.us-central1.run.app)
 
 ---
 
 HavenForKids is a **digital health and wellness platform** designed to support the emotional development of children aged 7–12. Through a warm, browser-based pixel-art village, children engage with AI wellness companions that help them process feelings, build emotional vocabulary, and develop healthy coping habits — all through natural conversation. A real-time parent wellness dashboard surfaces emotional patterns, sentiment trends, and early distress signals — **without ever exposing conversation text**.
 
 HavenForKids sits at the intersection of **preventive mental health**, **child development**, and **responsible AI** — giving families an accessible, stigma-free tool for emotional wellbeing long before a clinical intervention is needed.
+
+<br>
+
+## Quick Start — No Setup Required
+
+HavenForKids is fully live and ready to use. No installation, no app store, no account required for parents.
+
+### For the Child
+1. Open **[HavenForKids](https://havenforkids-game-708818914032.us-central1.run.app)** in any modern browser
+2. Click **"I'm new here"** to create an account — choose a username and a 4-digit PIN
+3. Note the **Family Code** shown after registration — share it with a parent
+4. Click **"Enter HavenForKids"** then **"Interact"** to enter the wellness village
+5. Explore the village — a wellness companion will walk over and start a conversation within ~2 minutes
+6. Chat naturally — there are no right or wrong answers
+
+### For the Parent
+1. Open the **[Parent Wellness Dashboard](https://havenforkids-dashboard-708818914032.us-central1.run.app)**
+2. Enter the **Family Code** your child received at registration
+3. View your child's emotional wellness patterns — companion engagement, tone trends, and any distress alerts
+4. The dashboard updates in real time as your child uses the platform
+
+> **Privacy note:** The dashboard never shows conversation text — only pattern-level wellness insights.
 
 <br>
 
@@ -155,8 +177,8 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 
 | Service | Platform | URL |
 |---------|----------|-----|
-| Wellness Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
-| Parent Dashboard | Google Cloud Run | [havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app) |
+| Wellness Game | Google Cloud Run | [havenforkids-game-708818914032.us-central1.run.app](https://havenforkids-game-708818914032.us-central1.run.app) |
+| Parent Dashboard | Google Cloud Run | [havenforkids-dashboard-708818914032.us-central1.run.app](https://havenforkids-dashboard-708818914032.us-central1.run.app) |
 | Convex Backend | Convex Cloud | `impartial-goldfinch-622.convex.cloud` |
 
 ---
