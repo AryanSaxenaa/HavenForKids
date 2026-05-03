@@ -1,8 +1,8 @@
-# HAVEN
+# HavenForKids
 
 ### AI-Powered Emotional Wellbeing for Children, Real-Time Insights for Parents
 
-> **Live:** [Play HAVEN](https://ai-town-lxo1tyv1v-aryan-saxenas-projects-691b9d9c.vercel.app) &nbsp;·&nbsp; [Parent Dashboard](https://haven-dashboard-production.up.railway.app)
+> **Live:** [Play HavenForKids](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) &nbsp;·&nbsp; [Parent Dashboard](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app)
 
 ---
 
@@ -87,7 +87,7 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
                 │                                │
     ┌───────────────────────┐       ┌──────────────────────────┐
     │  AI Town Game (Vite)  │       │  Parent Dashboard (Vite) │
-    │  Vercel (Free Tier)   │       │  Railway (Hobby Tier)    │
+    │  Google Cloud Run     │       │  Google Cloud Run        │
     │                       │       │                          │
     │  PixiJS village       │       │  Recharts visualisation  │
     │  Three AI companions  │       │  Framer Motion UI        │
@@ -143,8 +143,8 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 | AI memory | Vector embeddings with semantic search (Convex vector store) |
 | Child auth | Custom username + 4-digit PIN system |
 | Sentiment analysis | Dual-layer keyword-based scoring (70+ distress phrases, positive/negative word lists) |
-| Game hosting | Vercel (free tier) |
-| Dashboard hosting | Railway (hobby tier, Dockerised) |
+| Game hosting | Google Cloud Run |
+| Dashboard hosting | Google Cloud Run (Dockerised) |
 
 ---
 
@@ -152,8 +152,8 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 
 | Service | Platform | URL |
 |---------|----------|-----|
-| AI Town Game | Vercel | [ai-town-lxo1tyv1v-aryan-saxenas-projects-691b9d9c.vercel.app](https://ai-town-lxo1tyv1v-aryan-saxenas-projects-691b9d9c.vercel.app) |
-| Parent Dashboard | Railway | [haven-dashboard-production.up.railway.app](https://haven-dashboard-production.up.railway.app) |
+| AI Town Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
+| Parent Dashboard | Google Cloud Run | [havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app) |
 | Convex Backend | Convex Cloud | `lovely-quail-205.convex.cloud` |
 
 ---
@@ -187,7 +187,6 @@ Haven/
 │
 ├── dashboard/                       # Parent-facing dashboard application
 │   ├── Dockerfile                           # Multi-stage Docker build (node:20.19)
-│   ├── railway.toml                         # Railway deployment config
 │   └── src/
 │       ├── hooks/
 │       │   └── useDashboardData.ts          # Family Code → data resolution
@@ -238,8 +237,8 @@ Each companion is defined by a unique identity, an emotional archetype, and a be
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/AryanSaxenaa/Haven.git
-cd Haven
+git clone https://github.com/AryanSaxenaa/HavenForKids.git
+cd HavenForKids
 ```
 
 ### 2. Install dependencies
@@ -328,8 +327,8 @@ cd dashboard && npm run dev
 The system is deployed across three platforms:
 
 - **Convex Cloud** — Backend functions + database → `npx convex deploy`
-- **Vercel** — AI Town game (static site) → `vercel --prod`
-- **Railway** — Parent dashboard (Dockerised) → `railway up`
+- **Google Cloud Run** — AI Town game (Dockerised) → `gcloud run deploy havenforkids-game --source .`
+- **Google Cloud Run** — Parent dashboard (Dockerised) → `gcloud run deploy havenforkids-dashboard --source .`
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for the full step-by-step guide.
 

@@ -12,7 +12,7 @@ This document describes the data flow, component boundaries, and design decision
 │                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │  AI Town  (Vite 6, React 18, PixiJS)                     │    │
-│  │  Deployed: Vercel (free tier)                             │    │
+│  │  Deployed: Google Cloud Run                              │    │
 │  │                                                          │    │
 │  │  LoginScreen.tsx      — username + PIN authentication     │    │
 │  │  App.tsx              — auth gate, session management     │    │
@@ -33,7 +33,7 @@ This document describes the data flow, component boundaries, and design decision
 │                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │  Dashboard  (Vite 6, React 18, Recharts, Framer Motion) │    │
-│  │  Deployed: Railway (hobby tier, Dockerised)               │    │
+│  │  Deployed: Google Cloud Run (Dockerised)                 │    │
 │  │                                                          │    │
 │  │  ParentDashboard.tsx  — Family Code input, data display  │    │
 │  │  useDashboardData.ts  — code → username → data pipeline  │    │
