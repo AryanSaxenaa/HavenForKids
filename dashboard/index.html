@@ -3,7 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HAVEN — Parent Dashboard</title>
+    <title>HavenForKids — Parent Wellness Dashboard</title>
+    <meta name="description" content="Monitor your child's emotional wellness activity in HavenForKids. View companion engagement, tone trends, and distress alerts — privately and securely." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --cream: #fdf8f3;
+        --warm-white: #ffffff;
+        --text-dark: #2d2318;
+        --text-mid: #6b5d4f;
+        --text-light: #9e8d80;
+        --border: #e8ddd4;
+        --green: #7da87b;
+        --green-dark: #5a8c58;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        height: 100%;
+        background: var(--cream);
+        color: var(--text-dark);
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #root {
+        min-height: 100%;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
