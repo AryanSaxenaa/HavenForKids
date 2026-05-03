@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . .
-ENV VITE_CONVEX_URL=https://lovely-quail-205.convex.cloud
+ENV VITE_CONVEX_URL=https://impartial-goldfinch-622.convex.cloud
 RUN npm run build
 
 # Serve stage

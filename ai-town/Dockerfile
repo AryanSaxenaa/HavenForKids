@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
-ENV VITE_CONVEX_URL=https://lovely-quail-205.convex.cloud
+ENV VITE_CONVEX_URL=https://impartial-goldfinch-622.convex.cloud
 RUN npm run build
 
 # Serve stage — lightweight image just to serve static files

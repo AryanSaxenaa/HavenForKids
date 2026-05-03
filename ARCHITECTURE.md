@@ -48,7 +48,7 @@ This document describes the data flow, component boundaries, and design decision
                            │
               ┌────────────▼───────────────────┐
               │   Convex Serverless Backend    │
-              │   (lovely-quail-205)           │
+              │   (impartial-goldfinch-622)    │
               │                               │
               │   convex/auth.ts              │
               │     registerUser              │

@@ -8,7 +8,7 @@ This document covers deploying HavenForKids to production. The system consists o
 |---------|----------|-----|
 | AI Town Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
 | Parent Dashboard | Google Cloud Run | [havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app) |
-| Convex Backend | Convex Cloud | `lovely-quail-205.convex.cloud` |
+| Convex Backend | Convex Cloud | `impartial-goldfinch-622.convex.cloud` |
 
 ---
 

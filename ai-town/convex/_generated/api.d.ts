@@ -8,11 +8,6 @@
  * @module
  */
 
-import type {
-  ApiFromModules,
-  FilterApi,
-  FunctionReference,
-} from "convex/server";
 import type * as agent_conversation from "../agent/conversation.js";
 import type * as agent_embeddingsCache from "../agent/embeddingsCache.js";
 import type * as agent_memory from "../agent/memory.js";
@@ -46,10 +41,10 @@ import type * as init from "../init.js";
 import type * as messages from "../messages.js";
 import type * as music from "../music.js";
 import type * as testing from "../testing.js";
+import type * as util_FastIntegerCompression from "../util/FastIntegerCompression.js";
 import type * as util_assertNever from "../util/assertNever.js";
 import type * as util_asyncMap from "../util/asyncMap.js";
 import type * as util_compression from "../util/compression.js";
-import type * as util_FastIntegerCompression from "../util/FastIntegerCompression.js";
 import type * as util_geometry from "../util/geometry.js";
 import type * as util_isSimpleObject from "../util/isSimpleObject.js";
 import type * as util_llm from "../util/llm.js";
@@ -60,14 +55,12 @@ import type * as util_types from "../util/types.js";
 import type * as util_xxhash from "../util/xxhash.js";
 import type * as world from "../world.js";
 
-/**
- * A utility for referencing Convex functions in your app's API.
- *
- * Usage:
- * ```js
- * const myFunctionReference = api.myModule.myFunction;
- * ```
- */
+import type {
+  ApiFromModules,
+  FilterApi,
+  FunctionReference,
+} from "convex/server";
+
 declare const fullApi: ApiFromModules<{
   "agent/conversation": typeof agent_conversation;
   "agent/embeddingsCache": typeof agent_embeddingsCache;
@@ -102,10 +95,10 @@ declare const fullApi: ApiFromModules<{
   messages: typeof messages;
   music: typeof music;
   testing: typeof testing;
+  "util/FastIntegerCompression": typeof util_FastIntegerCompression;
   "util/assertNever": typeof util_assertNever;
   "util/asyncMap": typeof util_asyncMap;
   "util/compression": typeof util_compression;
-  "util/FastIntegerCompression": typeof util_FastIntegerCompression;
   "util/geometry": typeof util_geometry;
   "util/isSimpleObject": typeof util_isSimpleObject;
   "util/llm": typeof util_llm;
@@ -116,11 +109,31 @@ declare const fullApi: ApiFromModules<{
   "util/xxhash": typeof util_xxhash;
   world: typeof world;
 }>;
+
+/**
+ * A utility for referencing Convex functions in your app's public API.
+ *
+ * Usage:
+ * ```js
+ * const myFunctionReference = api.myModule.myFunction;
+ * ```
+ */
 export declare const api: FilterApi<
   typeof fullApi,
   FunctionReference<any, "public">
 >;
+
+/**
+ * A utility for referencing Convex functions in your app's internal API.
+ *
+ * Usage:
+ * ```js
+ * const myFunctionReference = internal.myModule.myFunction;
+ * ```
+ */
 export declare const internal: FilterApi<
   typeof fullApi,
   FunctionReference<any, "internal">
 >;
+
+export declare const components: {};
