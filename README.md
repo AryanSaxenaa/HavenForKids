@@ -1,92 +1,95 @@
 # HavenForKids
 
-### AI-Powered Emotional Wellbeing for Children, Real-Time Insights for Parents
+### A Children's Emotional Health & Wellness Platform Powered by AI
 
-> **Live:** [Play HavenForKids](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) &nbsp;·&nbsp; [Parent Dashboard](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app)
+> **Live:** [Open HavenForKids](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) &nbsp;·&nbsp; [Parent Wellness Dashboard](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app)
 
 ---
 
-HAVEN is a browser-based pixel-art village where AI companion characters help children aged 7–12 express their feelings through natural conversation. Children don't fill out mood surveys or label emotions — they walk around a cosy village, chat with storybook friends, and feel heard. Behind the scenes, a real-time parent dashboard surfaces emotional patterns, sentiment trends, and distress alerts — **without ever exposing conversation text**.
+HavenForKids is a **digital health and wellness platform** designed to support the emotional development of children aged 7–12. Through a warm, browser-based pixel-art village, children engage with AI wellness companions that help them process feelings, build emotional vocabulary, and develop healthy coping habits — all through natural conversation. A real-time parent wellness dashboard surfaces emotional patterns, sentiment trends, and early distress signals — **without ever exposing conversation text**.
+
+HavenForKids sits at the intersection of **preventive mental health**, **child development**, and **responsible AI** — giving families an accessible, stigma-free tool for emotional wellbeing long before a clinical intervention is needed.
 
 <br>
 
-## Why HAVEN Exists
+## The Wellness Gap We're Closing
 
-One in four people will experience a mental health condition in their lifetime. For children, the gap between need and support is staggering: the average delay between first symptoms and first professional help is **twelve years**. Early intervention is the single most effective tool we have — but children rarely have the vocabulary, the confidence, or a trusted channel to express what they are going through.
+Emotional health is the foundation of a child's overall wellbeing — yet it is the most consistently under-served dimension of children's health. The numbers are stark:
 
-Existing tools fall into two categories: clinical instruments designed for professionals, or consumer apps that ask children to understand and label their own emotions before they are developmentally ready. Neither fills the gap between *"a child is struggling"* and *"a child receives support."*
+- **1 in 5 children** experiences a diagnosable mental health condition before age 18
+- The average delay between first symptoms and first professional support is **12 years**
+- Most children lack the vocabulary, confidence, or trusted channel to express what they are feeling
+- Existing tools are either clinical instruments built for professionals, or consumer apps that ask children to self-diagnose before they are developmentally ready
 
-**HAVEN takes a different approach.** Children don't talk *about* their feelings. They walk around a pixel-art village and talk to friends — and the friends happen to be designed to hear them.
-
----
-
-## Key Features
-
-| Feature | Description |
-|---------|-------------|
-| **Pixel-art village** | A warm, explorable overworld powered by PixiJS — no downloads, runs in any modern browser |
-| **AI companions** | Three distinct companions (Sunny, Sage, Keeper) each specialising in a different emotional domain |
-| **Proactive check-ins** | Companions don't wait to be approached — they walk to the child and start conversations every 2–3 minutes |
-| **Persistent memory** | Companions remember previous conversations across sessions using vector-embedded semantic memory |
-| **Conversation safety** | Companions never leave mid-conversation with a child; idle-kick protections prevent accidental disconnects |
-| **Real-time sentiment analysis** | Keyword-based dual-layer scoring tracks emotional tone across every conversation |
-| **70+ distress detectors** | Expanded keyword set covering bullying (physical, verbal, social), school avoidance, self-harm ideation, isolation, and more |
-| **Parent dashboard** | Visualises conversation frequency, tone trends, companion usage, and distress alerts — zero conversation text exposed |
-| **Family Code access** | Parents authenticate via a 6-character code; no usernames, no passwords, no surveillance |
-| **Child-safe auth** | 4-digit PIN login designed for ages 7–12 — no email, no passwords |
-| **Privacy by design** | No third-party analytics, no ad SDKs, no data sharing — everything stays in your own Convex deployment |
+**HavenForKids takes a wellness-first approach.** Rather than treating emotional health as a clinical problem to be solved, we treat it as a daily practice to be supported — the same way physical health apps support exercise and nutrition. Children don't talk *about* their feelings. They explore a cosy village, meet friendly companions, and feel genuinely heard. The wellness insights emerge naturally from those conversations.
 
 ---
 
-## How It Works
+## Core Wellness Features
 
-### For the Child
+| Feature | Wellness Benefit |
+|---------|-----------------|
+| **AI wellness companions** | Three companions (Sunny, Sage, Keeper) each specialising in a distinct emotional domain — anxiety, stress, and fear — providing targeted, age-appropriate support |
+| **Proactive check-ins** | Companions initiate conversations every 2–3 minutes, modelling healthy emotional check-in habits and reducing the barrier for children to open up |
+| **Persistent emotional memory** | Companions remember previous conversations using vector-embedded semantic memory, building a continuous, trusting relationship over time |
+| **Real-time sentiment tracking** | Dual-layer keyword-based scoring monitors emotional tone across every conversation, surfacing trends before they become crises |
+| **70+ distress detectors** | Early-warning system covering bullying (physical, verbal, social), school avoidance, self-harm ideation, and social isolation |
+| **Parent wellness dashboard** | Gives parents pattern-level emotional health insights — conversation frequency, tone trends, companion engagement, distress alerts — with zero exposure of conversation text |
+| **Family Code access** | Privacy-first parent authentication via a 6-character code — no accounts, no surveillance, no data sharing |
+| **Child-safe design** | 4-digit PIN login for ages 7–12, Grade 5 reading level responses, browser-based with no installation required |
+| **Privacy by design** | No third-party analytics, no advertising SDKs, no data sharing — all data stays in your own Convex deployment |
 
-The child opens a browser and enters a small village. They choose a character, name themselves, and explore. When they walk close to a companion, a conversation begins. The child types naturally. The companion responds warmly, asks follow-up questions, and validates what the child shares — always in simple language, always without diagnosis or judgement.
+---
 
-| Companion | Emotional Domain | Personality |
-|-----------|-----------------|-------------|
-| **Sunny** | Anxiety and worry | Curious and gentle; shares small worries of their own to normalise the feeling |
-| **Sage** | Stress and overwhelm | Calm and mindful; teaches grounding through conversation |
-| **Keeper** | Fear and uncertainty | Steady and patient; breaks large problems into small, manageable steps |
+## How HavenForKids Supports Wellness
 
-Each companion has **persistent memory**. When a child returns the next day, the companion remembers their previous conversations and picks up naturally.
+### For the Child — Building Emotional Fitness
 
-### For the Parent
+The child opens a browser and enters a small, safe village. They choose a character, name themselves, and explore freely. When they walk close to a wellness companion, a conversation begins naturally. The child types in their own words. The companion responds warmly, validates what the child shares, asks gentle follow-up questions, and models healthy emotional processing — always in simple language, always without judgement or diagnosis.
 
-Parents access a separate dashboard using a **six-character Family Code** generated at registration. The dashboard shows:
+| Companion | Wellness Domain | Approach |
+|-----------|----------------|---------|
+| **Sunny** | Anxiety & worry | Normalises worry by sharing small concerns of their own; builds confidence through gentle validation |
+| **Sage** | Stress & overwhelm | Teaches grounding and mindfulness through calm, structured conversation |
+| **Keeper** | Fear & uncertainty | Builds resilience by breaking large problems into small, manageable steps |
 
-- Which companions the child has spoken with, and how often (with interactive charts)
-- **Real-time sentiment scoring** across conversations (1–5 scale, keyword-based — not a random number)
-- Context-aware suggestions that adapt based on detected distress and emotional patterns
-- **Distress alerts** if any message contains language associated with crisis, bullying, or school avoidance
-- Last active timestamp and total message count
+Each companion maintains **persistent emotional memory**. When a child returns the next day, the companion picks up naturally from where they left off — reinforcing the sense of a trusted, ongoing relationship that is central to emotional wellness.
 
-> **The parent dashboard never displays conversation text.** Parents receive pattern-level information, not surveillance.
+### For the Parent — Informed Without Intrusive
 
-### Safety System
+Parents access a separate wellness dashboard using a **six-character Family Code** generated at registration. The dashboard provides:
 
-Every message is evaluated by **two independent detection layers** running in parallel:
+- Which wellness companions the child has engaged with, and how often (interactive charts)
+- **Real-time emotional tone scoring** across conversations (1–5 scale, keyword-based NLP)
+- Context-aware wellness suggestions that adapt to detected emotional patterns
+- **Early distress alerts** when language associated with crisis, bullying, or school avoidance is detected
+- Engagement trends over time — last active timestamp, total conversations, weekly activity
 
-1. **LLM-level analysis** — The companion AI is instructed to flag language indicating self-harm, abuse, or severe distress
+> **The parent dashboard never displays conversation text.** Parents receive wellness-level pattern insights, not surveillance. This boundary is enforced at the data architecture level — not just policy.
+
+### Safety & Crisis Response
+
+Every message is evaluated by **two independent wellness safety layers** running in parallel:
+
+1. **AI-level analysis** — Each companion is instructed to flag language indicating self-harm, abuse, or severe distress, and respond with warmth and safety
 2. **Keyword matching** — A backend layer scans against 70+ distress phrases covering:
    - Self-harm and suicidal ideation
    - Physical bullying ("punched me", "kicked me", "hit me")
-   - Verbal/social bullying ("calls me names", "making fun of me", "laughed at me")
+   - Verbal and social bullying ("calls me names", "making fun of me", "laughed at me")
    - School avoidance ("don't want to go to school", "hate school", "scared of school")
    - Isolation and loneliness ("nobody likes me", "have no friends", "feel alone")
 
-If either layer triggers, the parent dashboard immediately surfaces a distress alert. The child sees nothing alarming.
+If either layer triggers, the parent dashboard immediately surfaces a distress alert. The child's experience is never interrupted or alarmed.
 
 ---
 
-## Architecture
+## Platform Architecture
 
 ```
            Child Browser                    Parent Browser
                 │                                │
     ┌───────────────────────┐       ┌──────────────────────────┐
-    │  AI Town Game (Vite)  │       │  Parent Dashboard (Vite) │
+    │  Wellness Game (Vite) │       │  Parent Dashboard (Vite) │
     │  Google Cloud Run     │       │  Google Cloud Run        │
     │                       │       │                          │
     │  PixiJS village       │       │  Recharts visualisation  │
@@ -111,21 +114,21 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
                │   LLM Provider (Mistral AI)    │
                │   Companion conversations      │
                │   Memory summarisation         │
-               │   Reflection generation        │
+               │   Wellness reflection          │
                └────────────────────────────────┘
 ```
 
-### Design Decisions
+### Key Design Decisions
 
-| Decision | Why |
-|----------|-----|
-| **Username as stable identity** | Each child's username becomes their `clientToken` in the game engine — agent memories are permanently tied to a specific child across every session |
-| **Family Code, not username** | The 6-character code is the only mechanism for parent dashboard access; knowing a username grants nothing |
-| **Memory isolation** | Memories are indexed by `playerId` derived from username; two children playing simultaneously have entirely separate memory graphs |
-| **Proactive engagement** | Companions walk to children every 2–3 minutes with per-agent jitter offsets to prevent simultaneous arrivals |
-| **Conversation-aware idle protection** | The idle-kick timer (5 min) is suspended when a child is in an active conversation — no accidental disconnects |
-| **Agent leave guard** | Companions are blocked from leaving a conversation while talking to a human child, even if internal message limits are reached |
-| **Real sentiment scoring** | Tone analysis uses actual keyword-based NLP (positive/negative word counting) instead of placeholder values |
+| Decision | Wellness Rationale |
+|----------|--------------------|
+| **Username as stable identity** | Agent memories are permanently tied to a specific child — companions build a genuine, continuous relationship rather than starting fresh each session |
+| **Family Code, not username** | Parents access wellness insights without being able to identify or surveil individual conversations |
+| **Memory isolation** | Each child has a completely separate memory graph — siblings or classmates using the same deployment never share emotional context |
+| **Proactive engagement** | Companions initiate check-ins every 2–3 minutes, modelling the healthy habit of regular emotional check-ins rather than waiting for a child to reach out in distress |
+| **Conversation-aware idle protection** | The idle-kick timer is suspended during active conversations — a child is never disconnected mid-disclosure |
+| **Agent leave guard** | Companions cannot leave a conversation while a child is talking — reinforcing the safety and reliability of the relationship |
+| **Real sentiment scoring** | Tone analysis uses genuine keyword-based NLP rather than placeholder values — wellness insights are grounded in real data |
 
 ---
 
@@ -133,7 +136,7 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 
 | Component | Technology |
 |-----------|-----------|
-| Game engine | AI Town (Convex-native pixel-art village simulation) |
+| Wellness game engine | AI Town (Convex-native pixel-art village simulation) |
 | Rendering | PixiJS |
 | Game UI | React 18, Vite 6, Tailwind CSS |
 | Dashboard UI | React 18, Vite 6, Framer Motion, Recharts, Lucide |
@@ -142,7 +145,7 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 | LLM provider | Mistral AI (mistral-large-latest) via OpenAI-compatible SDK |
 | AI memory | Vector embeddings with semantic search (Convex vector store) |
 | Child auth | Custom username + 4-digit PIN system |
-| Sentiment analysis | Dual-layer keyword-based scoring (70+ distress phrases, positive/negative word lists) |
+| Wellness analytics | Dual-layer keyword-based scoring (70+ distress phrases, positive/negative word lists) |
 | Game hosting | Google Cloud Run |
 | Dashboard hosting | Google Cloud Run (Dockerised) |
 
@@ -152,7 +155,7 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 
 | Service | Platform | URL |
 |---------|----------|-----|
-| AI Town Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
+| Wellness Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
 | Parent Dashboard | Google Cloud Run | [havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app) |
 | Convex Backend | Convex Cloud | `impartial-goldfinch-622.convex.cloud` |
 
@@ -161,13 +164,13 @@ If either layer triggers, the parent dashboard immediately surfaces a distress a
 ## Project Structure
 
 ```
-Haven/
-├── ai-town/                         # Child-facing game application
+HavenForKids/
+├── ai-town/                         # Child-facing wellness game
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── LoginScreen.tsx              # Username + PIN auth UI
 │   │   │   ├── MessageInput.tsx             # Chat input with Send button
-│   │   │   └── PlayerDetails.tsx            # Character panel
+│   │   │   └── PlayerDetails.tsx            # Companion info panel
 │   │   └── App.tsx                          # Auth gate + game shell
 │   ├── convex/
 │   │   ├── schema.ts                        # Full database schema
@@ -183,15 +186,15 @@ Haven/
 │   │       ├── agentOperations.ts           # Proactive check-in behaviour
 │   │       └── player.ts                    # Conversation-aware idle protection
 │   └── data/
-│       └── characters.ts                    # Companion identities and prompts
+│       └── characters.ts                    # Companion identities and wellness prompts
 │
-├── dashboard/                       # Parent-facing dashboard application
+├── dashboard/                       # Parent wellness dashboard
 │   ├── Dockerfile                           # Multi-stage Docker build (node:20.19)
 │   └── src/
 │       ├── hooks/
-│       │   └── useDashboardData.ts          # Family Code → data resolution
+│       │   └── useDashboardData.ts          # Family Code → wellness data pipeline
 │       └── pages/
-│           └── ParentDashboard.tsx           # Dashboard UI with alerts
+│           └── ParentDashboard.tsx          # Wellness dashboard UI with alerts
 │
 ├── ARCHITECTURE.md                  # Detailed technical architecture
 ├── DEPLOYMENT.md                    # Production deployment guide
@@ -200,29 +203,29 @@ Haven/
 
 ---
 
-## Companion Design
+## Wellness Companion Design
 
-Each companion is defined by a unique identity, an emotional archetype, and a behavioural plan. The system prompt is never exposed in the UI. Key behavioural constraints enforced across all companions:
+Each companion is defined by a unique identity, an emotional wellness archetype, and a set of behavioural constraints that prioritise the child's safety and development. Key principles enforced across all companions:
 
 - Responses are limited to **2–3 sentences** in simple language appropriate for ages 7–12
-- Companions **validate feelings before offering any guidance**
+- Companions **validate feelings before offering any guidance** — emotional validation is the first step in healthy emotional processing
 - Companions never diagnose, never refer to professional help unprompted, and never dismiss what a child shares
-- When companions reference shared awareness of a child, they frame it as natural intuition ("I've been thinking about that kind of feeling lately") rather than inter-agent communication
-- **Companions never leave a conversation with a human child** — message limits and duration timeouts only apply to agent-to-agent conversations
+- When companions reference shared awareness of a child, they frame it as natural intuition ("I've been thinking about that kind of feeling lately") — preserving the child's sense of privacy while enabling coordinated wellness support
+- **Companions never leave a conversation with a child** — message limits and duration timeouts only apply to agent-to-agent conversations
 
 ---
 
-## Privacy and Ethical Design
+## Privacy & Ethical Wellness Design
 
-**Privacy First.** The parent dashboard provides pattern-level visibility — frequency, tone score, distress flags — and does not expose any conversation transcripts. No third-party analytics, advertising SDKs, or tracking of any kind. Family Codes (not usernames) are the parent access mechanism.
+**Privacy First.** The parent dashboard provides pattern-level wellness visibility — frequency, tone score, distress flags — and does not expose any conversation transcripts. No third-party analytics, advertising SDKs, or tracking of any kind. Family Codes (not usernames) are the parent access mechanism. This is enforced at the data architecture level.
 
-**Do No Harm.** Companion prompts explicitly prohibit medical advice, diagnosis, and unsolicited referrals. A dual-layer distress detection system (LLM flag + 70+ keyword matching) alerts parents when crisis-associated language appears — without interrupting the child's experience.
+**Do No Harm.** Companion prompts explicitly prohibit medical advice, diagnosis, and unsolicited referrals. A dual-layer distress detection system (AI flag + 70+ keyword matching) alerts parents when crisis-associated language appears — without interrupting or alarming the child.
 
-**Inclusive Design.** Four-digit PIN authentication accessible to young children. Visible Send button alongside keyboard submission. Grade 5 reading level for all companion responses. Browser-based — no installation required.
+**Inclusive Wellness Design.** Four-digit PIN authentication accessible to young children. Visible Send button alongside keyboard submission. Grade 5 reading level for all companion responses. Browser-based — no installation, no app store, no device restrictions.
 
-**Transparency.** Companions are presented as storybook characters, never as real beings. System prompts instruct companions never to claim personhood. This documentation describes the full technical architecture openly.
+**Transparency.** Companions are presented as storybook characters, never as real beings or therapists. System prompts instruct companions never to claim personhood or professional expertise. This documentation describes the full technical architecture openly.
 
-**Zero Token Waste.** Agent LLM calls are gated behind human-presence detection — no tokens are consumed when no child is playing.
+**Zero Token Waste.** AI calls are gated behind human-presence detection — no compute is consumed when no child is actively using the platform.
 
 ---
 
@@ -244,9 +247,8 @@ cd HavenForKids
 ### 2. Install dependencies
 
 ```bash
-npm install                              # Root
-cd ai-town && npm install && cd ..       # Game
-cd dashboard && npm install && cd ..     # Dashboard
+cd ai-town && npm install && cd ..
+cd dashboard && npm install && cd ..
 ```
 
 ### 3. Configure the Convex backend
@@ -256,7 +258,7 @@ cd ai-town
 npx convex dev --once
 ```
 
-This creates your Convex deployment and generates API types.
+This creates your Convex deployment and generates API types. Note the deployment URL printed.
 
 ### 4. Set environment variables
 
@@ -273,7 +275,7 @@ VITE_CONVEX_URL=https://your-deployment.convex.cloud
 **Set the LLM key in Convex:**
 ```bash
 cd ai-town
-npx convex env set OPENAI_API_KEY your-api-key-here
+npx convex env set OPENAI_API_KEY your-mistral-api-key-here
 ```
 
 ### 5. Run the development servers
@@ -282,17 +284,17 @@ npx convex env set OPENAI_API_KEY your-api-key-here
 # Terminal 1 — Convex backend
 cd ai-town && npx convex dev
 
-# Terminal 2 — Game
+# Terminal 2 — Wellness game
 cd ai-town && npm run dev
 
-# Terminal 3 — Dashboard
+# Terminal 3 — Parent dashboard
 cd dashboard && npm run dev
 ```
 
 | Service | URL |
 |---------|-----|
-| Game (child) | http://localhost:5173 |
-| Dashboard (parent) | http://localhost:5174 |
+| Wellness game (child) | http://localhost:5173 |
+| Parent dashboard | http://localhost:5174 |
 | Convex dashboard | https://dashboard.convex.dev |
 
 ### 6. First run
@@ -300,10 +302,10 @@ cd dashboard && npm run dev
 1. Open `http://localhost:5173`
 2. Click **"I'm new here"** to create an account
 3. Note the **Family Code** displayed after registration
-4. Click **"Enter HAVEN"** to enter the game
+4. Click **"Enter HavenForKids"** to enter the wellness village
 5. Click **"Interact"** to join the world as a player
-6. Wait ~2 minutes — a companion will walk over and start talking
-7. Open `http://localhost:5174` and enter the Family Code
+6. Wait ~2 minutes — a wellness companion will walk over and start a check-in
+7. Open `http://localhost:5174` and enter the Family Code to view the parent dashboard
 
 ---
 
@@ -313,21 +315,21 @@ cd dashboard && npm run dev
 
 | Constant | Default | Description |
 |----------|---------|-------------|
-| `HAVEN_CHECKIN_INTERVAL` | 2 min | Base interval between proactive companion check-ins |
+| `HAVEN_CHECKIN_INTERVAL` | 2 min | Base interval between proactive wellness check-ins |
 | `HAVEN_CHECKIN_JITTER` | 60 sec | Random offset per companion to stagger arrivals |
-| `AWKWARD_CONVERSATION_TIMEOUT` | 3 min | Companion speaks first if child is silent |
-| `MAX_CONVERSATION_DURATION` | 20 min | Maximum agent-to-agent conversation (does **not** apply to human conversations) |
-| `MAX_CONVERSATION_MESSAGES` | 12 | Maximum agent-to-agent messages (does **not** apply to human conversations) |
+| `AWKWARD_CONVERSATION_TIMEOUT` | 3 min | Companion initiates if child is silent |
+| `MAX_CONVERSATION_DURATION` | 20 min | Maximum agent-to-agent conversation (does **not** apply to child conversations) |
+| `MAX_CONVERSATION_MESSAGES` | 12 | Maximum agent-to-agent messages (does **not** apply to child conversations) |
 | `HUMAN_IDLE_TOO_LONG` | 5 min | Idle-kick timer (suspended during active conversations) |
 
 ---
 
 ## Deployment
 
-The system is deployed across three platforms:
+The platform is deployed across three services:
 
-- **Convex Cloud** — Backend functions + database → `npx convex deploy`
-- **Google Cloud Run** — AI Town game (Dockerised) → `gcloud run deploy havenforkids-game --source .`
+- **Convex Cloud** — Backend functions + wellness database → `npx convex deploy`
+- **Google Cloud Run** — Wellness game (Dockerised) → `gcloud run deploy havenforkids-game --source .`
 - **Google Cloud Run** — Parent dashboard (Dockerised) → `gcloud run deploy havenforkids-dashboard --source .`
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for the full step-by-step guide.
@@ -336,9 +338,9 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for the full step-by-step guide.
 
 ## Acknowledgements
 
-HAVEN is built on top of [AI Town](https://github.com/a16z-infra/ai-town), an open-source framework for simulating AI agent worlds by a16z-infra (MIT License). The world simulation engine, agent tick loop, pathfinding, and memory infrastructure are derived from that work.
+HavenForKids is built on top of [AI Town](https://github.com/a16z-infra/ai-town), an open-source framework for simulating AI agent worlds by a16z-infra (MIT License). The world simulation engine, agent tick loop, pathfinding, and memory infrastructure are derived from that work.
 
-HAVEN's original contributions include: the authentication system, companion identities with ethically constrained prompts, human-presence-gated token management, proactive check-in behaviour, conversation-aware idle protection, agent leave guards, shared companion memory with intuition rewrites, keyword-based sentiment analysis, 70+ phrase distress detection, and the parent dashboard.
+HavenForKids' original contributions include: the wellness-focused authentication system, companion identities with ethically constrained prompts, human-presence-gated token management, proactive wellness check-in behaviour, conversation-aware idle protection, agent leave guards, shared companion memory with intuition rewrites, keyword-based sentiment analysis, 70+ phrase distress detection, and the parent wellness dashboard.
 
 **Additional credits:**
 - [Convex](https://convex.dev) — Serverless database and real-time backend
@@ -349,7 +351,6 @@ HAVEN's original contributions include: the authentication system, companion ide
 
 ## License
 
-HAVEN is released under the MIT License. See [LICENSE](./LICENSE).
+HavenForKids is released under the MIT License. See [LICENSE](./LICENSE).
 
 The underlying AI Town framework is also MIT licensed. Copyright 2023 a16z-infra. See `ai-town/LICENSE`.
-

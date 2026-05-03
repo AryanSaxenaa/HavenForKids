@@ -1,13 +1,13 @@
 # HavenForKids — Deployment Guide
 
-This document covers deploying HavenForKids to production. The system consists of two frontend applications and one Convex serverless backend.
+This document covers deploying the HavenForKids wellness platform to production. The system consists of two frontend applications (wellness game + parent dashboard) and one Convex serverless backend.
 
 ## Current Live Deployments
 
 | Service | Platform | URL |
 |---------|----------|-----|
-| AI Town Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
-| Parent Dashboard | Google Cloud Run | [havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app) |
+| Wellness Game | Google Cloud Run | [havenforkids-game-kmj4z2oxfa-uc.a.run.app](https://havenforkids-game-kmj4z2oxfa-uc.a.run.app) |
+| Parent Wellness Dashboard | Google Cloud Run | [havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app](https://havenforkids-dashboard-kmj4z2oxfa-uc.a.run.app) |
 | Convex Backend | Convex Cloud | `impartial-goldfinch-622.convex.cloud` |
 
 ---
@@ -17,14 +17,14 @@ This document covers deploying HavenForKids to production. The system consists o
 - A Convex account: [convex.dev](https://convex.dev) (free tier sufficient)
 - A Google Cloud account with billing enabled: [cloud.google.com](https://cloud.google.com)
 - Google Cloud CLI installed and authenticated: `gcloud auth login`
-- An LLM API key (Mistral AI recommended, or any OpenAI-compatible provider)
+- An LLM API key — Mistral AI recommended ([console.mistral.ai](https://console.mistral.ai)), or any OpenAI-compatible provider
 - Node.js 20+ installed locally
 
 ---
 
 ## Step 1: Deploy the Convex Backend
 
-The Convex backend serves both frontend applications. Deploy it first.
+The Convex backend powers both frontend applications — deploy it first.
 
 ```bash
 cd ai-town
@@ -33,18 +33,26 @@ cd ai-town
 npx convex login
 
 # Deploy to production
-npx convex deploy --yes
+npx convex deploy
 ```
 
-Save the deployment URL printed (format: `https://[deployment-name].convex.cloud`).
+Save the production deployment URL printed (format: `https://[name].convex.cloud`).
 
 ### Set the LLM API key
 
 ```bash
-npx convex env set OPENAI_API_KEY your-api-key-here
+npx convex env set OPENAI_API_KEY your-mistral-api-key --prod
 ```
 
-If using Mistral AI, update the base URL in `ai-town/convex/util/llm.ts` to `https://api.mistral.ai/v1`.
+If using Mistral AI, confirm the base URL in `ai-town/convex/util/llm.ts` is set to `https://api.mistral.ai/v1`.
+
+### Initialise the wellness world
+
+```bash
+npx convex run init:main
+```
+
+This seeds the game world with the three wellness companions (Sunny, Sage, Keeper).
 
 ### Verify
 
@@ -54,18 +62,21 @@ Visit [dashboard.convex.dev](https://dashboard.convex.dev) and confirm:
 
 ---
 
-## Step 2: Deploy the AI Town Game (Google Cloud Run)
+## Step 2: Deploy the Wellness Game (Google Cloud Run)
 
-The game is built as a static site and served via `serve` inside a Docker container.
+The game is built as a static site and served via `serve` inside a Docker container. The `VITE_CONVEX_URL` is baked into the image at build time.
 
 ```bash
 cd ai-town
 
-# Set your GCP project
+# Update the Convex URL in the Dockerfile first
+# Edit: ENV VITE_CONVEX_URL=https://your-deployment.convex.cloud
+
+# Set your GCP project and region
 gcloud config set project YOUR_PROJECT_ID
 gcloud config set run/region us-central1
 
-# Deploy from source (Cloud Build handles the Docker build)
+# Deploy from source — Cloud Build handles the Docker build automatically
 gcloud run deploy havenforkids-game \
   --source . \
   --platform managed \
@@ -74,15 +85,15 @@ gcloud run deploy havenforkids-game \
   --port 8080
 ```
 
-The `VITE_CONVEX_URL` is baked into the image at build time via the Dockerfile `ENV` directive.
-If you use a different Convex deployment, update `ENV VITE_CONVEX_URL` in `ai-town/Dockerfile` before deploying.
-
 ---
 
-## Step 3: Deploy the Parent Dashboard (Google Cloud Run)
+## Step 3: Deploy the Parent Wellness Dashboard (Google Cloud Run)
 
 ```bash
 cd dashboard
+
+# Update the Convex URL in the Dockerfile first
+# Edit: ENV VITE_CONVEX_URL=https://your-deployment.convex.cloud
 
 # Deploy from source
 gcloud run deploy havenforkids-dashboard \
@@ -93,18 +104,18 @@ gcloud run deploy havenforkids-dashboard \
   --port 8080
 ```
 
-Same as the game — `VITE_CONVEX_URL` is baked in via `dashboard/Dockerfile`.
-
 ---
 
 ## Dockerfile Details
 
 Both services use a two-stage Docker build:
 
-1. **Build stage** (`node:20.19-bullseye` for game, `node:20.19-alpine` for dashboard) — installs dependencies and runs `vite build`
+1. **Build stage** — installs dependencies and runs `vite build` with `VITE_CONVEX_URL` baked in
+   - Wellness game: `node:20.19-bullseye` (Debian — required for `hnswlib-node` native compilation)
+   - Dashboard: `node:20.19-alpine` (lightweight)
 2. **Serve stage** (`node:20.19-alpine`) — installs `serve` and serves the `dist/` folder
 
-Cloud Run injects the `PORT` environment variable at runtime; both containers respect it via:
+Cloud Run injects the `PORT` environment variable at runtime; both containers respect it:
 ```
 CMD ["sh", "-c", "serve dist -s -l tcp://0.0.0.0:${PORT:-8080}"]
 ```
@@ -113,44 +124,33 @@ CMD ["sh", "-c", "serve dist -s -l tcp://0.0.0.0:${PORT:-8080}"]
 
 ## Environment Variable Reference
 
-### AI Town Game (Dockerfile)
+### Wellness Game (`ai-town/Dockerfile`)
 
-| Variable | Where | Description |
-|----------|-------|-------------|
-| `VITE_CONVEX_URL` | `ENV` in `ai-town/Dockerfile` | Baked into the static build at build time |
+| Variable | Where set | Description |
+|----------|-----------|-------------|
+| `VITE_CONVEX_URL` | `ENV` directive in Dockerfile | Baked into the static build at build time — update before redeploying |
 
-### Dashboard (Dockerfile)
+### Parent Dashboard (`dashboard/Dockerfile`)
 
-| Variable | Where | Description |
-|----------|-------|-------------|
-| `VITE_CONVEX_URL` | `ENV` in `dashboard/Dockerfile` | Baked into the static build at build time |
+| Variable | Where set | Description |
+|----------|-----------|-------------|
+| `VITE_CONVEX_URL` | `ENV` directive in Dockerfile | Baked into the static build at build time — update before redeploying |
 
 ### Convex Backend
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `OPENAI_API_KEY` | Yes | API key for the LLM provider (set via `npx convex env set`) |
+| `OPENAI_API_KEY` | Yes | Mistral AI (or compatible) API key — set via `npx convex env set` |
 
 ---
 
-## Initialising Game World Data
-
-On first deployment, the game world needs initial data:
-
-```bash
-cd ai-town
-npx convex run init:main
-```
-
----
-
-## Verifying the Deployment
+## Verifying the Wellness Platform
 
 1. **Game** — Open the game URL. You should see the HavenForKids login screen.
-2. **Register** — Click "I'm new here", create an account, note the Family Code.
-3. **Enter world** — Click "Interact" to join. Your character appears on the map.
-4. **Companion check-in** — Wait ~2 minutes. A companion should walk over and start a conversation.
-5. **Dashboard** — Open the dashboard URL, enter the Family Code. Data appears after at least one completed conversation.
+2. **Register** — Click "I'm new here", create an account, note the **Family Code**.
+3. **Enter the wellness village** — Click "Interact" to join. Your character appears on the map.
+4. **Companion check-in** — Wait ~2 minutes. A wellness companion will walk over and start a conversation.
+5. **Parent dashboard** — Open the dashboard URL, enter the Family Code. Wellness data appears after at least one completed conversation.
 6. **Distress detection** — Send a test message containing a distress phrase (e.g., "someone hit me"). Confirm the dashboard surfaces an alert.
 
 ---
@@ -158,11 +158,11 @@ npx convex run init:main
 ## Redeploying After Changes
 
 ```bash
-# Redeploy game
+# Redeploy wellness game
 cd ai-town
 gcloud run deploy havenforkids-game --source . --platform managed --region us-central1 --allow-unauthenticated --port 8080
 
-# Redeploy dashboard
+# Redeploy parent dashboard
 cd dashboard
 gcloud run deploy havenforkids-dashboard --source . --platform managed --region us-central1 --allow-unauthenticated --port 8080
 ```
@@ -175,7 +175,7 @@ HavenForKids uses the OpenAI SDK format. To switch providers:
 
 1. Open `ai-town/convex/util/llm.ts`
 2. Update the `baseURL` to your provider's endpoint
-3. Set the API key via `npx convex env set OPENAI_API_KEY your-key`
+3. Set the API key: `npx convex env set OPENAI_API_KEY your-key --prod`
 
 **Confirmed compatible providers:** Mistral AI (`https://api.mistral.ai/v1`), Together AI, Anyscale, and any OpenAI-compatible API.
 
@@ -184,13 +184,14 @@ HavenForKids uses the OpenAI SDK format. To switch providers:
 ## Production Checklist
 
 - [ ] Convex backend deployed; all functions visible in Convex dashboard
-- [ ] `OPENAI_API_KEY` set in Convex environment
+- [ ] `OPENAI_API_KEY` set in Convex prod environment
+- [ ] Wellness world initialised via `npx convex run init:main`
 - [ ] `VITE_CONVEX_URL` updated in both Dockerfiles to point to your Convex deployment
-- [ ] AI Town game deployed on Cloud Run — service URL accessible
+- [ ] Wellness game deployed on Cloud Run — service URL accessible
 - [ ] Parent dashboard deployed on Cloud Run — service URL accessible
-- [ ] Registration flow tested: create account → receive Family Code → enter game
-- [ ] Companion check-in verified: companion approaches player within ~2 minutes
-- [ ] Dashboard tested: Family Code lookup returns data after a conversation
+- [ ] Registration flow tested: create account → receive Family Code → enter wellness village
+- [ ] Companion check-in verified: companion approaches child within ~2 minutes
+- [ ] Dashboard tested: Family Code lookup returns wellness data after a conversation
 - [ ] Distress detection tested: flagged keyword triggers dashboard alert
 - [ ] Conversation persistence tested: companion does not leave mid-conversation with a child
 
@@ -204,7 +205,7 @@ Run `npx convex dev` once to generate the API types, then rebuild.
 **Dashboard shows "Family Code not found"**
 Codes use only `A–Z` and `2–9` (no `0`, `O`, `1`, `I`). Ensure correct case.
 
-**Companions do not approach the player**
+**Wellness companions do not approach the child**
 The check-in interval is 2–3 minutes. Confirm the player clicked "Interact" and their character is visible on the map.
 
 **Cloud Run build fails with gyp/Python error**
@@ -214,4 +215,4 @@ The `ai-town` Dockerfile uses `node:20.19-bullseye` which includes Python and bu
 The `dashboard/package.json` pins `@vitejs/plugin-react` to `^4.3.0` (compatible with vite 6). Do not change this to `latest` — v6+ of the plugin requires vite 8.
 
 **Cloud Run container not starting**
-Ensure the `PORT` env var is respected. Both containers use `${PORT:-8080}` so Cloud Run's injected port is honoured automatically.
+Both containers use `${PORT:-8080}` so Cloud Run's injected `PORT` is honoured automatically. Ensure you are not hardcoding a port in the serve command.
